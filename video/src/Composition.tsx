@@ -1,4 +1,5 @@
 import React from "react";
+import {Audio} from "@remotion/media";
 import {
   AbsoluteFill,
   Composition,
@@ -12,24 +13,29 @@ import {
 
 const INK = "#0A0A0A";
 const PAPER = "#FFFFFF";
-const SCAN = "#B7FF4A";
-const ease = Easing.bezier(0.16, 1, 0.3, 1);
+const ease = Easing.bezier(0.22, 1, 0.36, 1);
+const editorialEase = Easing.bezier(0.45, 0, 0.55, 1);
 
-const BeatFade = ({duration, children}: {duration: number; children: React.ReactNode}) => {
+const BeatFade = ({
+  duration,
+  children,
+  fadeIn = 28,
+  fadeOut = 20,
+}: {
+  duration: number;
+  children: React.ReactNode;
+  fadeIn?: number;
+  fadeOut?: number;
+}) => {
   const frame = useCurrentFrame();
   return (
     <AbsoluteFill style={{backgroundColor: PAPER}}>
       <AbsoluteFill
         style={{
-          opacity: interpolate(frame, [0, 18, duration - 12, duration], [0, 1, 1, 0], {
+          opacity: interpolate(frame, [0, fadeIn, duration - fadeOut, duration], [0, 1, 1, 0], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
-            easing: ease,
-          }),
-          translate: interpolate(frame, [0, 24], ["0px 14px", "0px 0px"], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-            easing: ease,
+            easing: editorialEase,
           }),
         }}
       >
@@ -70,29 +76,62 @@ const ModelPill = ({label}: {label: string}) => (
   </div>
 );
 
-const RestaurantSketch = ({muted = false}: {muted?: boolean}) => (
-  <svg className="restaurant-sketch" viewBox="0 0 820 390" fill="none" aria-hidden="true" style={{opacity: muted ? 0.12 : 1}}>
-    <g stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M112 318H708"/>
-      <path d="M166 310V139H654V310"/>
-      <path d="M146 139H674L637 82H183L146 139Z"/>
-      <path d="M183 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
-      <path d="M249 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
-      <path d="M315 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
-      <path d="M381 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
-      <path d="M447 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
-      <path d="M513 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
-      <path d="M579 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
-      <rect x="222" y="232" width="112" height="78" rx="3"/>
-      <rect x="493" y="232" width="112" height="78" rx="3"/>
-      <path d="M378 310v-92h72v92"/>
-      <circle cx="430" cy="265" r="3" fill="currentColor" strokeWidth="0"/>
-      <path d="M271 251h14M542 251h14"/>
-    </g>
-    <text x="410" y="120" textAnchor="middle" fill="currentColor" fontFamily="IBM Plex Sans, Arial" fontSize="27" fontWeight="700" letterSpacing="7">RAUL&apos;S</text>
-    <text x="410" y="352" textAnchor="middle" fill="currentColor" fontFamily="IBM Plex Sans, Arial" fontSize="13" fontWeight="600" letterSpacing="4">SMALL RESTAURANT · BUILT ONE DAY AT A TIME</text>
-  </svg>
-);
+const RestaurantSketch = ({muted = false, animated = false}: {muted?: boolean; animated?: boolean}) => {
+  const frame = useCurrentFrame();
+  const reveal = (from: number, to: number) => animated
+    ? interpolate(frame, [from, to], [0, 1], {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+        easing: ease,
+      })
+    : 1;
+  const ground = reveal(4, 42);
+  const shell = reveal(16, 66);
+  const roof = reveal(38, 88);
+  const details = reveal(66, 118);
+  const lettering = reveal(92, 142);
+  const openSign = reveal(110, 154);
+  const breathe = animated ? Math.sin(frame / 22) : 0;
+
+  return (
+    <svg className="restaurant-sketch" viewBox="0 0 820 390" fill="none" aria-hidden="true" style={{opacity: muted ? 0.12 : 1}}>
+      <g stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+        <path
+          d="M112 318H708"
+          pathLength={1}
+          style={{strokeDasharray: 1, strokeDashoffset: 1 - ground}}
+        />
+        <g style={{opacity: shell, translate: `0px ${20 * (1 - shell)}px`}}>
+          <path d="M166 310V139H654V310"/>
+          <path d="M146 139H674L637 82H183L146 139Z"/>
+        </g>
+        <g style={{opacity: roof, translate: `0px ${-14 * (1 - roof)}px`}}>
+          <path d="M183 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
+          <path d="M249 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
+          <path d="M315 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
+          <path d="M381 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
+          <path d="M447 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
+          <path d="M513 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
+          <path d="M579 139v41c0 18 15 33 33 33s33-15 33-33v-41"/>
+        </g>
+        <g style={{opacity: details, scale: 0.96 + details * 0.04, transformOrigin: "410px 280px"}}>
+          <rect x="222" y="232" width="112" height="78" rx="3"/>
+          <rect x="493" y="232" width="112" height="78" rx="3"/>
+          <path d="M378 310v-92h72v92"/>
+          <circle cx="430" cy="265" r="3" fill="currentColor" strokeWidth="0"/>
+          <path d="M271 251h14M542 251h14"/>
+        </g>
+        <g style={{opacity: openSign, rotate: `${breathe * 1.4}deg`, transformOrigin: "550px 275px"}}>
+          <path d="M542 253v12"/>
+          <rect x="518" y="265" width="64" height="28" rx="3" fill={PAPER}/>
+        </g>
+      </g>
+      <text x="550" y="284" textAnchor="middle" fill="currentColor" fontFamily="IBM Plex Sans, Arial" fontSize="14" fontWeight="700" letterSpacing="2" style={{opacity: openSign}}>OPEN</text>
+      <text x="410" y="120" textAnchor="middle" fill="currentColor" fontFamily="IBM Plex Sans, Arial" fontSize="27" fontWeight="700" letterSpacing="7" style={{opacity: lettering}}>RAUL&apos;S</text>
+      <text x="410" y="352" textAnchor="middle" fill="currentColor" fontFamily="IBM Plex Sans, Arial" fontSize="17" fontWeight="600" letterSpacing="3.4" style={{opacity: lettering}}>SMALL RESTAURANT · BUILT ONE DAY AT A TIME</text>
+    </svg>
+  );
+};
 
 const EnvelopeSketch = () => (
   <svg className="envelope-sketch" viewBox="0 0 340 230" fill="none" aria-hidden="true">
@@ -132,12 +171,16 @@ const RestaurantBeat = () => {
   return (
     <AbsoluteFill className="story-canvas">
       <div className="restaurant-wrap" style={{
-        opacity: interpolate(frame, [0, 34], [0, 1], {extrapolateRight: "clamp", easing: ease}),
-        scale: interpolate(frame, [0, 46], [0.94, 1], {extrapolateRight: "clamp", easing: ease}),
-      }}><RestaurantSketch/></div>
+        opacity: interpolate(frame, [0, 26], [0, 1], {extrapolateRight: "clamp", easing: ease}),
+        scale: interpolate(frame, [0, 72, 190], [0.93, 1, 1.012], {extrapolateRight: "clamp", easing: ease}),
+        translate: interpolate(frame, [0, 72, 190], ["-50% 20px", "-50% 0px", "-50% -5px"], {extrapolateRight: "clamp", easing: editorialEase}),
+      }}><RestaurantSketch animated/></div>
       <div className="story-copy bottom-copy">
-        <span>A SMALL BUSINESS STORY</span>
-        <h1>Raul&apos;s restaurant<br/><em>is already struggling.</em></h1>
+        <span style={{opacity: interpolate(frame, [92, 134], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase})}}>A SMALL BUSINESS STORY</span>
+        <h1 style={{
+          opacity: interpolate(frame, [112, 122], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+          translate: interpolate(frame, [112, 172], ["0px 14px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+        }}>Raul&apos;s restaurant<br/><em>is already struggling.</em></h1>
       </div>
     </AbsoluteFill>
   );
@@ -152,16 +195,26 @@ const PressureBeat = () => {
   ];
   return (
     <AbsoluteFill className="story-canvas">
-      <div className="restaurant-wrap compact-store"><RestaurantSketch/></div>
-      {burdens.map((item) => <div key={item.label} className="burden-tag" style={{
+      <div className="restaurant-wrap compact-store" style={{
+        scale: interpolate(frame, [0, 52, 138], [1.04, 1, 0.992], {extrapolateRight: "clamp", easing: editorialEase}),
+        translate: interpolate(frame, [0, 52], ["-50% -10px", "-50% 0px"], {extrapolateRight: "clamp", easing: ease}),
+      }}><RestaurantSketch/></div>
+      {burdens.map((item) => <div key={item.label} className={"burden-tag " + (item.label === "PAYROLL DUE" ? "burden-primary" : "")} style={{
         left: item.x,
         top: item.y,
         opacity: interpolate(frame, [item.from, item.from + 18], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
         translate: interpolate(frame, [item.from, item.from + 24], ["0px 12px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
+        rotate: interpolate(frame, [item.from, item.from + 24], [item.x < 900 ? "-3deg" : "3deg", "0deg"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
       }}>{item.label}</div>)}
       <div className="pressure-copy">
-        <h2>Payroll is due.</h2>
-        <p style={{opacity: interpolate(frame, [58, 82], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>Every dollar matters.</p>
+        <h2 style={{
+          opacity: interpolate(frame, [8, 18], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+          translate: interpolate(frame, [8, 60], ["0px 12px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+        }}>Payroll is due.</h2>
+        <p style={{
+          opacity: interpolate(frame, [48, 58], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+          translate: interpolate(frame, [48, 102], ["0px 10px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+        }}>Every dollar matters.</p>
       </div>
     </AbsoluteFill>
   );
@@ -171,18 +224,25 @@ const LetterBeat = () => {
   const frame = useCurrentFrame();
   return (
     <AbsoluteFill className="story-canvas letter-beat">
-      <div className="restaurant-wrap compact-store"><RestaurantSketch muted/></div>
+      <div className="restaurant-wrap compact-store" style={{
+        opacity: interpolate(frame, [0, 62], [0.34, 0.12], {extrapolateRight: "clamp", easing: editorialEase}),
+        scale: interpolate(frame, [0, 76], [1, 0.96], {extrapolateRight: "clamp", easing: editorialEase}),
+      }}><RestaurantSketch/></div>
       <div className="letter-arrival" style={{
-        opacity: interpolate(frame, [8, 30], [0, 1], {extrapolateRight: "clamp", easing: ease}),
-        translate: interpolate(frame, [0, 44], ["0px -150px", "0px 0px"], {extrapolateRight: "clamp", easing: ease}),
-        rotate: interpolate(frame, [0, 44], ["-5deg", "0deg"], {extrapolateRight: "clamp", easing: ease}),
+        opacity: interpolate(frame, [8, 32], [0, 1], {extrapolateRight: "clamp", easing: ease}),
+        translate: interpolate(frame, [0, 54, 76], ["-50% -220px", "-50% 8px", "-50% 0px"], {extrapolateRight: "clamp", easing: ease}),
+        rotate: interpolate(frame, [0, 54, 76], ["-7deg", "1.2deg", "0deg"], {extrapolateRight: "clamp", easing: ease}),
+        scale: interpolate(frame, [0, 54, 76], [0.9, 1.025, 1], {extrapolateRight: "clamp", easing: ease}),
       }}>
         <EnvelopeSketch/>
         <span>FINANCIAL RECORDS SUBPOENA</span>
       </div>
       <div className="story-copy upper-copy">
-        <span>THEN ONE MORNING</span>
-        <h1>Raul is <em>served.</em></h1>
+        <span style={{opacity: interpolate(frame, [10, 50], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase})}}>THEN ONE MORNING</span>
+        <h1 style={{
+          opacity: interpolate(frame, [26, 36], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+          translate: interpolate(frame, [26, 84], ["0px 14px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+        }}>Raul is <em>served.</em></h1>
       </div>
     </AbsoluteFill>
   );
@@ -194,11 +254,14 @@ const QuestionChip = ({text, from, x, y}: {text: string; from: number; x: number
     left: x,
     top: y,
     opacity: interpolate(frame, [from, from + 18], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
-    translate: interpolate(frame, [from, from + 26], ["0px 18px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
+    translate: interpolate(frame, [from, from + 30, from + 170], ["0px 22px", "0px 0px", `0px ${x < 900 ? -5 : 5}px`], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
+    scale: interpolate(frame, [from, from + 34], [0.96, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
+    rotate: interpolate(frame, [from, from + 36], [x < 900 ? "-1.5deg" : "1.5deg", "0deg"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
   }}>{text}</div>;
 };
 
 const QuestionsBeat = () => {
+  const frame = useCurrentFrame();
   const questions = [
     {text: "What is this?", from: 24, x: 220, y: 235},
     {text: "Is it real?", from: 48, x: 1450, y: 226},
@@ -210,21 +273,41 @@ const QuestionsBeat = () => {
   ];
   return (
     <AbsoluteFill className="question-canvas">
-      <div className="question-heading"><span>RAUL DOESN&apos;T KNOW WHAT TO DO</span><h2>The letter arrived.<br/>The next step did not.</h2></div>
-      <div className="raul-wrap"><RaulFigure/></div>
+      <div className="question-heading">
+        <span style={{opacity: interpolate(frame, [4, 38], [0, 1], {extrapolateRight: "clamp", easing: editorialEase})}}>RAUL DOESN&apos;T KNOW WHAT TO DO</span>
+        <h2 style={{
+          opacity: interpolate(frame, [12, 22], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+          translate: interpolate(frame, [12, 64], ["0px 12px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+        }}>The letter arrived.<br/>The next step did not.</h2>
+      </div>
+      <div className="raul-wrap" style={{
+        opacity: interpolate(frame, [0, 34], [0, 1], {extrapolateRight: "clamp", easing: ease}),
+        translate: interpolate(frame, [0, 44, 250], ["-50% 24px", "-50% 0px", "-50% -4px"], {extrapolateRight: "clamp", easing: editorialEase}),
+        scale: interpolate(frame, [0, 50], [0.96, 1], {extrapolateRight: "clamp", easing: ease}),
+      }}><RaulFigure/></div>
       {questions.map((question) => <QuestionChip key={question.text} {...question}/>)}
     </AbsoluteFill>
   );
 };
 
-const SolutionBeat = () => (
-  <AbsoluteFill className="solution-beat">
-    <BrandMark size={94}/>
-    <span>THE BURDEN GETS SMALLER</span>
-    <h1>Served solves this.</h1>
-    <p>A clear next step—without asking Raul to become a lawyer.</p>
-  </AbsoluteFill>
-);
+const SolutionBeat = () => {
+  const frame = useCurrentFrame();
+  return (
+    <AbsoluteFill className="solution-beat">
+      <div style={{
+        opacity: interpolate(frame, [0, 24], [0, 1], {extrapolateRight: "clamp", easing: ease}),
+        scale: interpolate(frame, [0, 38], [0.84, 1], {extrapolateRight: "clamp", easing: ease}),
+        rotate: interpolate(frame, [0, 38], ["-5deg", "0deg"], {extrapolateRight: "clamp", easing: ease}),
+      }}><BrandMark size={94}/></div>
+      <span style={{opacity: interpolate(frame, [22, 46], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>THE BURDEN GETS SMALLER</span>
+      <h1 style={{
+        opacity: interpolate(frame, [30, 40], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+        translate: interpolate(frame, [30, 72], ["0px 14px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+      }}>Served solves this.</h1>
+      <p style={{opacity: interpolate(frame, [52, 82], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>A clear next step—without asking Raul to become a lawyer.</p>
+    </AbsoluteFill>
+  );
+};
 
 const FounderStatement = ({from, to, children}: {from: number; to: number; children: React.ReactNode}) => {
   const frame = useCurrentFrame();
@@ -234,191 +317,184 @@ const FounderStatement = ({from, to, children}: {from: number; to: number; child
   }}>{children}</div>;
 };
 
-const FounderBeat = () => (
-  <AbsoluteFill className="founder-beat">
-    <PhoneSketch/>
-    <FounderStatement from={0} to={108}><span>THIS PROBLEM IS PERSONAL</span><h2>This problem is personal<br/>to our team.</h2></FounderStatement>
-    <FounderStatement from={100} to={224}><span>WHY WE BUILT SERVED</span><h2>I worked as a legal assistant<br/>in law offices for years.</h2></FounderStatement>
-    <FounderStatement from={216} to={330}><span>OVER AND OVER</span><h2>I heard these questions from<br/>small-business owners, over and over.</h2></FounderStatement>
-  </AbsoluteFill>
-);
+const FounderBeat = () => {
+  const frame = useCurrentFrame();
+  return <AbsoluteFill className="founder-beat">
+    <div style={{
+      opacity: interpolate(frame, [0, 30], [0, 1], {extrapolateRight: "clamp", easing: ease}),
+      rotate: interpolate(frame, [0, 48, 620], ["-7deg", "0deg", "2deg"], {extrapolateRight: "clamp", easing: editorialEase}),
+      translate: interpolate(frame, [0, 48], ["-20px 0px", "0px 0px"], {extrapolateRight: "clamp", easing: ease}),
+    }}><PhoneSketch/></div>
+    <FounderStatement from={0} to={120}><span>THIS PROBLEM IS PERSONAL</span><h2>I worked as a legal assistant<br/>in law offices for many years.</h2></FounderStatement>
+    <FounderStatement from={110} to={320}><span>THE GAP I SAW</span><h2>For many law firms, these matters are simply too small<br/>to justify the time and cost of an attorney—<br/><em>and they won&apos;t take them.</em></h2></FounderStatement>
+    <FounderStatement from={310} to={432}><span>THE OWNER IS STILL WAITING</span><h2>But owners like Raul just want to know:<br/><em>what do I do next?</em></h2></FounderStatement>
+    <FounderStatement from={420} to={624}><span>EVEN WITH A LAWYER</span><h2>Even when an attorney reviews the document,<br/>much of the work still falls on you.</h2></FounderStatement>
+  </AbsoluteFill>;
+};
 
-const StepShell = ({number, title, subtitle, role, children}: {number: string; title: string; subtitle: string; role: string; children: React.ReactNode}) => (
-  <AbsoluteFill className="workflow-beat">
-    <div className="workflow-brand"><Brand compact/></div>
-    <div className="step-heading">
-      <span>{number} / 05</span>
-      <h2>{title}</h2>
-      <p>{subtitle}</p>
+const WhyBuiltBeat = () => {
+  const frame = useCurrentFrame();
+  return <AbsoluteFill className="why-built-beat">
+    <div style={{
+      opacity: interpolate(frame, [0, 14], [0, 1], {extrapolateRight: "clamp", easing: ease}),
+      scale: interpolate(frame, [0, 24], [0.88, 1], {extrapolateRight: "clamp", easing: ease}),
+    }}><BrandMark size={82}/></div>
+    <span style={{opacity: interpolate(frame, [6, 24], [0, 1], {extrapolateRight: "clamp", easing: ease})}}>A BETTER NEXT STEP</span>
+    <h1 style={{
+      opacity: interpolate(frame, [8, 18], [0, 1], {extrapolateRight: "clamp", easing: editorialEase}),
+      translate: interpolate(frame, [8, 34], ["0px 12px", "0px 0px"], {extrapolateRight: "clamp", easing: editorialEase}),
+    }}>That&apos;s why we built <em>Served.</em></h1>
+  </AbsoluteFill>;
+};
+
+const CapabilityRow = ({
+  from,
+  eyebrow,
+  title,
+  detail,
+}: {
+  from: number;
+  eyebrow: string;
+  title: string;
+  detail: string;
+}) => {
+  const frame = useCurrentFrame();
+  const enter = interpolate(frame, [from, from + 18], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: ease,
+  });
+  return <div className="capability-row" style={{opacity: enter, translate: `${18 * (1 - enter)}px 0px`}}>
+    <div className="capability-check">✓</div>
+    <span>{eyebrow}</span>
+    <strong>{title}</strong>
+    <small>{detail}</small>
+  </div>;
+};
+
+const ResponseWorkflowBeat = () => {
+  const frame = useCurrentFrame();
+  return <AbsoluteFill className="response-workflow-beat">
+    <div className="response-workflow-brand"><Brand compact/></div>
+    <div className="response-workflow-heading">
+      <span>WHAT SERVED DOES</span>
+      <h2>From confusing request<br/>to a clear response.</h2>
     </div>
-    <div className="centered-stage">
-      <div className="stage-meta"><span>ONE CLEAR NEXT STEP</span><strong>{role}</strong></div>
-      {children}
+    <div className="capability-stack">
+      <CapabilityRow from={4} eyebrow="VERIFY" title="Checks the legal request" detail="Public source evidence stays separate from the uploaded document."/>
+      <CapabilityRow from={38} eyebrow="EXPLAIN" title="Translates it into plain English" detail="GPT-5.6 explains the request without changing the code-decided result."/>
+      <CapabilityRow from={78} eyebrow="FLAG" title="Flags suspicious or fraudulent documents" detail="Only supported warning signs count; uncertainty fails safely."/>
+      <CapabilityRow from={138} eyebrow="GUIDE" title="Guides the full response workflow" detail="Court checks, Plaid Sandbox records, and review stay in one controlled flow."/>
     </div>
-  </AbsoluteFill>
-);
-
-const UploadBeat = () => {
-  const frame = useCurrentFrame();
-  const progress = interpolate(frame, [26, 132], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease});
-  return (
-    <StepShell number="01" title="Upload what arrived." subtitle="PDF · photo · scan" role="GPT-5.6 READER">
-      <div className="upload-object">
-        <div className="mini-document">
-          <div className="mini-doc-head"><span>SUBPOENA</span><span>26-CV-1842</span></div>
-          {[82, 62, 91, 73, 54].map((width) => <i key={width} style={{width: String(width) + "%"}}/>)}
-          <div className="mini-doc-stamp">RECEIVED</div>
-        </div>
-        <div className="scan-line" style={{top: String(14 + progress * 68) + "%", backgroundColor: SCAN}}/>
-      </div>
-      <div className="upload-progress"><div style={{width: String(progress * 100) + "%"}}/></div>
-    </StepShell>
-  );
+    <div className="capability-tech" style={{opacity: interpolate(frame, [150, 178], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>
+      <ModelPill label="GPT-5.6 · RESPONSES API"/>
+      <span>COURTLISTENER</span><i>+</i><span>PLAID SANDBOX</span>
+    </div>
+  </AbsoluteFill>;
 };
 
-const ReadBeat = () => {
+const HumanReviewBeat = () => {
   const frame = useCurrentFrame();
-  const fields = [
-    ["COURT", "District Court"],
-    ["CASE", "26-CV-1842"],
-    ["DEADLINE", "July 16, 2026"],
-    ["RECORDS REQUESTED", "Payroll · Jan–Mar 2026"],
-  ];
-  return (
-    <StepShell number="02" title="Served reads what matters." subtitle="The document becomes a small set of facts." role="GPT-5.6 READER + EXPLAINER">
-      <div className="read-sheet">
-        {fields.map((field, index) => <div key={field[0]} className="read-field" style={{
-          opacity: interpolate(frame, [24 + index * 23, 42 + index * 23], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
-          translate: interpolate(frame, [24 + index * 23, 48 + index * 23], ["18px 0px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
-        }}><span>{field[0]}</span><strong>{field[1]}</strong></div>)}
-        <ModelPill label="GPT-5.6 · RESPONSES API"/>
-      </div>
-    </StepShell>
-  );
-};
-
-const VerifyBeat = () => {
-  const frame = useCurrentFrame();
-  const nodes = [
-    ["DOCUMENT", "Exact excerpt"],
-    ["PUBLIC DOCKET", "CourtListener"],
-    ["VERIFIED SCOPE", "Code gate passed"],
-  ];
-  return (
-    <StepShell number="03" title="Then it checks what is real." subtitle="Source evidence must match before financial tools open." role="CHECKER · VERSIONED CODE">
-      <div className="verification-object">
-        <div className="verification-chain">
-          {nodes.map((node, index) => <React.Fragment key={node[0]}>
-            <div className={"verify-node " + (index === 2 ? "verified-node" : "")} style={{
-              opacity: interpolate(frame, [22 + index * 36, 42 + index * 36], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
-              scale: interpolate(frame, [22 + index * 36, 48 + index * 36], [0.95, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
-            }}><span>{node[0]}</span><b>{node[1]}</b></div>
-            {index < 2 && <div className="verify-arrow">→</div>}
-          </React.Fragment>)}
-        </div>
-        <div className="verification-proof" style={{opacity: interpolate(frame, [118, 144], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>
-          <span>✓ Court matched</span><span>✓ Case matched</span><span>✓ Deadline matched</span>
-        </div>
-        <ModelPill label="GPT-5.6 GATHERS · CODE DECIDES"/>
-      </div>
-    </StepShell>
-  );
-};
-
-const ConnectBeat = () => {
-  const frame = useCurrentFrame();
-  const connected = frame >= 70;
-  const rows = ["PAYROLL ACH · AUDREA BARNES", "CHECK · #1048 · A. BARNES", "ACH CREDIT · A. B. PAYROLL"];
-  return (
-    <StepShell number="04" title="Served connects the accounts Raul chooses." subtitle="Only after the request is verified." role="PLAID SANDBOX + COOK">
-      <div className="connection-object">
-        <div className="plaid-simple-head"><span>PLAID SANDBOX</span><b>{connected ? "CONNECTED" : "AUTHORIZING"}</b></div>
-        <div className="chosen-account">
-          <div className="bank-monogram">FP</div>
-          <div><b>First Platypus Bank</b><span>Business Checking ··4821</span></div>
-          <strong>{connected ? "✓" : "···"}</strong>
-        </div>
-        <div className="record-stream">
-          {rows.map((row, index) => <div key={row} style={{
-            opacity: interpolate(frame, [72 + index * 22, 92 + index * 22], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
-            translate: interpolate(frame, [72 + index * 22, 98 + index * 22], ["0px 14px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
-          }}><i/><span>{row}</span><small>IN SCOPE</small></div>)}
+  const actions = ["READ", "CHECK", "EXPLAIN"];
+  return <AbsoluteFill className="human-review-beat">
+    <div className="human-review-copy">
+      <span>ONE CORE PRINCIPLE</span>
+      <h2>Human in the loop.</h2>
+    </div>
+    <div className="human-review-flow">
+      <div className="agent-actions">
+        <div className="agent-actions-head"><OpenAIWordmark/><b>GPT-5.6</b></div>
+        <div className="action-row">
+          {actions.map((action, index) => <span key={action} style={{
+            opacity: interpolate(frame, [28 + index * 18, 44 + index * 18], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
+          }}>{action}</span>)}
         </div>
       </div>
-    </StepShell>
-  );
+      <div className="review-arrow" style={{opacity: interpolate(frame, [70, 92], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>→</div>
+      <div className="raul-approval" style={{
+        opacity: interpolate(frame, [82, 108], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
+        scale: interpolate(frame, [82, 108], [0.96, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
+      }}><span>FINAL CONTROL</span><b>RAUL APPROVES</b><small>Include · Keep out · Ask for help</small></div>
+    </div>
+    <div className="human-promise" style={{
+      opacity: interpolate(frame, [112, 140], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
+      translate: interpolate(frame, [112, 144], ["0px 12px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
+    }}><BrandMark size={34}/><strong>Nothing is sent without your approval.</strong></div>
+  </AbsoluteFill>;
 };
 
-const ResultsBeat = () => {
+const MissionBeat = () => {
   const frame = useCurrentFrame();
-  return (
-    <StepShell number="05" title="It finds only the records the request names." subtitle="Raul reviews every uncertain match." role="HUMAN REVIEW REQUIRED">
-      <div className="results-object">
-        <div className="results-summary" style={{opacity: interpolate(frame, [20, 42], [0, 1], {extrapolateRight: "clamp", easing: ease})}}>
-          <span><b>7</b> include</span><i>·</i><span className="review-count"><b>2</b> review</span><i>·</i><span><b>19</b> kept out</span>
-        </div>
-        <div className="uncertain-record" style={{
-          opacity: interpolate(frame, [60, 84], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
-          translate: interpolate(frame, [60, 90], ["0px 16px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
-        }}>
-          <div><span>NEEDS RAUL</span><b>ACH CREDIT · A. B. PAYROLL</b><small>Abbreviation candidate · $2,820.12</small></div>
-          <div className="review-actions"><span>INCLUDE</span><span>KEEP OUT</span></div>
-        </div>
-        <div className="nothing-sent" style={{opacity: interpolate(frame, [112, 138], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>
-          <BrandMark size={28}/><b>Nothing is sent automatically.</b><span>Raul keeps the decision.</span>
-        </div>
-      </div>
-    </StepShell>
-  );
+  return <AbsoluteFill className="mission-beat">
+    <BrandMark size={68}/>
+    <span style={{opacity: interpolate(frame, [4, 24], [0, 1], {extrapolateRight: "clamp", easing: ease})}}>WHAT WE BELIEVE</span>
+    <h2 style={{
+      opacity: interpolate(frame, [10, 20], [0, 1], {extrapolateRight: "clamp", easing: editorialEase}),
+      translate: interpolate(frame, [10, 42], ["0px 14px", "0px 0px"], {extrapolateRight: "clamp", easing: editorialEase}),
+    }}>No small-business owner should face<br/>legal paperwork alone.</h2>
+  </AbsoluteFill>;
 };
 
-const BriefBeat = () => {
+const TaglineBeat = () => {
   const frame = useCurrentFrame();
-  return (
-    <AbsoluteFill className="brief-beat">
-      <div className="brief-paper" style={{
-        opacity: interpolate(frame, [0, 22], [0, 1], {extrapolateRight: "clamp", easing: ease}),
-        translate: interpolate(frame, [0, 30], ["0px 24px", "0px 0px"], {extrapolateRight: "clamp", easing: ease}),
-      }}>
-        <div className="brief-paper-head"><Brand compact/><span>HUMAN REVIEW REQUIRED</span></div>
-        <small>COUNSEL-READY BRIEF</small>
-        <h2>Raul reviews it<br/>before anything leaves Served.</h2>
-        <div className="brief-route"><b>RAUL</b><span>→</span><b>ATTORNEY OR ACCOUNTANT HE CHOOSES</b></div>
-        <div className="brief-footer"><ModelPill label="GPT-5.6 EXPLAINER"/><span>Nothing produced or shared automatically.</span></div>
-      </div>
-    </AbsoluteFill>
-  );
+  return <AbsoluteFill className="tagline-beat">
+    <div className="tagline-first" style={{
+      opacity: interpolate(frame, [0, 14, 58, 76], [0, 1, 1, 0.18], {extrapolateRight: "clamp", easing: editorialEase}),
+    }}>You&apos;ve been served.</div>
+    <div className="tagline-second" style={{
+      opacity: interpolate(frame, [58, 74], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+      translate: interpolate(frame, [58, 98], ["0px 16px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
+    }}>Now, you&apos;re <em>Served by us.</em></div>
+  </AbsoluteFill>;
 };
 
-const EndBeat = () => (
-  <AbsoluteFill className="end-beat">
-    <BrandMark size={78}/>
-    <h1>You&apos;ve been served.<br/><em>Now, you&apos;re Served.</em></h1>
-    <p>No small business owner should face legal paperwork alone.</p>
-    <div className="demo-cue">NEXT: LIVE PRODUCT DEMO <span>→</span></div>
+const HandoffBeat = () => {
+  const frame = useCurrentFrame();
+  return <AbsoluteFill className="handoff-beat">
+    <BrandMark size={70}/>
+    <span>HANDING IT OVER TO MY TEAMMATE</span>
+    <h2 style={{
+      opacity: interpolate(frame, [4, 16], [0, 1], {extrapolateRight: "clamp", easing: editorialEase}),
+      translate: interpolate(frame, [4, 42], ["0px 12px", "0px 0px"], {extrapolateRight: "clamp", easing: editorialEase}),
+    }}>Now, let us show you<br/>how Served works.</h2>
+    <div className="demo-cue" style={{opacity: interpolate(frame, [42, 68], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>LIVE DEMO <span>→</span></div>
     <div className="technology-credit"><OpenAIWordmark/><span>GPT-5.6 via the Responses API · Built with Codex</span></div>
-    <small>Informational support—not legal advice.</small>
-  </AbsoluteFill>
-);
+  </AbsoluteFill>;
+};
 
 export const ServedStory = () => (
   <AbsoluteFill style={{backgroundColor: PAPER}}>
+    <Sequence name="Background music" durationInFrames={2437}>
+      <Audio
+        src={staticFile("audio/inspiring-cinematic-bg.mp3")}
+        trimBefore={90}
+        trimAfter={2527}
+        volume={(frame) => interpolate(
+          frame,
+          [0, 30, 870, 930, 2377, 2437],
+          [0, 0.17, 0.17, 0.07, 0.07, 0],
+          {extrapolateLeft: "clamp", extrapolateRight: "clamp"},
+        )}
+      />
+    </Sequence>
+    <Sequence name="Founder voiceover" from={930} durationInFrames={1507}>
+      <Audio src={staticFile("audio/founder-personal-0721.mp3")}/>
+    </Sequence>
     <Sequence name="Raul's restaurant" durationInFrames={210}><BeatFade duration={210}><RestaurantBeat/></BeatFade></Sequence>
     <Sequence name="A hard month" from={210} durationInFrames={150}><BeatFade duration={150}><PressureBeat/></BeatFade></Sequence>
     <Sequence name="The letter arrives" from={360} durationInFrames={180}><BeatFade duration={180}><LetterBeat/></BeatFade></Sequence>
     <Sequence name="Raul's questions" from={540} durationInFrames={270}><BeatFade duration={270}><QuestionsBeat/></BeatFade></Sequence>
     <Sequence name="Served solves this" from={810} durationInFrames={120}><BeatFade duration={120}><SolutionBeat/></BeatFade></Sequence>
-    <Sequence name="Founder connection" from={930} durationInFrames={330}><BeatFade duration={330}><FounderBeat/></BeatFade></Sequence>
-    <Sequence name="Step 1 - Upload" from={1260} durationInFrames={180}><BeatFade duration={180}><UploadBeat/></BeatFade></Sequence>
-    <Sequence name="Step 2 - Read" from={1440} durationInFrames={180}><BeatFade duration={180}><ReadBeat/></BeatFade></Sequence>
-    <Sequence name="Step 3 - Verify" from={1620} durationInFrames={180}><BeatFade duration={180}><VerifyBeat/></BeatFade></Sequence>
-    <Sequence name="Step 4 - Connect" from={1800} durationInFrames={180}><BeatFade duration={180}><ConnectBeat/></BeatFade></Sequence>
-    <Sequence name="Step 5 - Review" from={1980} durationInFrames={180}><BeatFade duration={180}><ResultsBeat/></BeatFade></Sequence>
-    <Sequence name="Counsel-ready brief" from={2160} durationInFrames={120}><BeatFade duration={120}><BriefBeat/></BeatFade></Sequence>
-    <Sequence name="Close" from={2280} durationInFrames={120}><BeatFade duration={120}><EndBeat/></BeatFade></Sequence>
+    <Sequence name="Founder connection" from={930} durationInFrames={624}><BeatFade duration={624} fadeIn={10} fadeOut={10}><FounderBeat/></BeatFade></Sequence>
+    <Sequence name="Why we built Served" from={1554} durationInFrames={73}><BeatFade duration={73} fadeIn={10} fadeOut={10}><WhyBuiltBeat/></BeatFade></Sequence>
+    <Sequence name="What Served does" from={1627} durationInFrames={238}><BeatFade duration={238} fadeIn={10} fadeOut={10}><ResponseWorkflowBeat/></BeatFade></Sequence>
+    <Sequence name="Human in the loop" from={1865} durationInFrames={193}><BeatFade duration={193} fadeIn={10} fadeOut={10}><HumanReviewBeat/></BeatFade></Sequence>
+    <Sequence name="Our belief" from={2058} durationInFrames={131}><BeatFade duration={131} fadeIn={10} fadeOut={10}><MissionBeat/></BeatFade></Sequence>
+    <Sequence name="Served by us" from={2189} durationInFrames={126}><BeatFade duration={126} fadeIn={10} fadeOut={10}><TaglineBeat/></BeatFade></Sequence>
+    <Sequence name="Demo handoff" from={2315} durationInFrames={122}><BeatFade duration={122} fadeIn={10} fadeOut={10}><HandoffBeat/></BeatFade></Sequence>
   </AbsoluteFill>
 );
 
 export const MyComposition = () => (
-  <Composition id="Served-Raul-Story" component={ServedStory} durationInFrames={2400} fps={30} width={1920} height={1080}/>
+  <Composition id="Served-Raul-Story" component={ServedStory} durationInFrames={2437} fps={30} width={1920} height={1080}/>
 );

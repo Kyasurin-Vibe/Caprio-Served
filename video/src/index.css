@@ -37,22 +37,22 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  min-height: 44px;
-  padding: 6px 12px;
+  min-height: 54px;
+  padding: 9px 16px;
   border: 1px solid #e5e5e5;
   border-radius: 999px;
   background: #fff;
 }
 
 .model-pill .openai-wordmark {
-  width: 90px;
+  width: 106px;
 }
 
 .model-pill span {
   padding-left: 12px;
   border-left: 1px solid #e5e5e5;
   color: #525252;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -63,7 +63,13 @@ body {
 .founder-beat,
 .workflow-beat,
 .brief-beat,
-.end-beat {
+.end-beat,
+.why-built-beat,
+.response-workflow-beat,
+.human-review-beat,
+.mission-beat,
+.tagline-beat,
+.handoff-beat {
   background: #fff;
   color: #0a0a0a;
   overflow: hidden;
@@ -104,7 +110,7 @@ body {
   display: block;
   margin-bottom: 16px;
   color: #525252;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.19em;
 }
@@ -121,7 +127,7 @@ body {
   margin: 0;
   font-family: Newsreader, Georgia, serif;
   font-size: 82px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 0.96;
   letter-spacing: -0.055em;
 }
@@ -143,7 +149,7 @@ body {
 .pressure-copy p {
   margin: 0;
   font-family: Newsreader, Georgia, serif;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: -0.05em;
 }
 
@@ -160,14 +166,22 @@ body {
 .burden-tag {
   position: absolute;
   z-index: 3;
-  padding: 11px 15px;
-  border: 1px solid #e5e5e5;
+  min-width: 210px;
+  padding: 19px 28px;
+  border: 2px solid #d4d4d4;
   border-radius: 999px;
   background: #fff;
   color: #525252;
-  font-size: 11px;
+  font-size: 19px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.burden-primary {
+  border-color: #0a0a0a;
+  background: #0a0a0a;
+  color: #fff;
 }
 
 .letter-beat .restaurant-wrap {
@@ -193,11 +207,11 @@ body {
 
 .letter-arrival > span {
   margin-top: 18px;
-  padding: 8px 12px;
+  padding: 11px 16px;
   border: 1px solid #0a0a0a;
   border-radius: 999px;
   background: #fff;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.14em;
 }
@@ -215,7 +229,7 @@ body {
   margin: 0;
   font-family: Newsreader, Georgia, serif;
   font-size: 54px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.05em;
 }
@@ -237,14 +251,14 @@ body {
 .question-chip {
   position: absolute;
   z-index: 5;
-  min-width: 240px;
-  padding: 17px 22px;
+  min-width: 300px;
+  padding: 20px 28px;
   border: 1px solid #d4d4d4;
   border-radius: 12px;
   background: #fff;
   font-family: Newsreader, Georgia, serif;
-  font-size: 24px;
-  font-weight: 350;
+  font-size: 28px;
+  font-weight: 400;
   letter-spacing: -0.025em;
   text-align: center;
 }
@@ -268,7 +282,7 @@ body {
   margin: 0;
   font-family: Newsreader, Georgia, serif;
   font-size: 104px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.065em;
 }
@@ -276,7 +290,7 @@ body {
 .solution-beat p {
   margin: 25px 0 0;
   color: #525252;
-  font-size: 21px;
+  font-size: 27px;
 }
 
 .phone-sketch {
@@ -299,9 +313,334 @@ body {
   margin: 0;
   font-family: Newsreader, Georgia, serif;
   font-size: 66px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1;
   letter-spacing: -0.055em;
+}
+
+.founder-statement h2 em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.why-built-beat,
+.mission-beat,
+.tagline-beat,
+.handoff-beat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.why-built-beat > span,
+.mission-beat > span,
+.handoff-beat > span,
+.response-workflow-heading > span,
+.human-review-copy > span {
+  display: block;
+  margin: 20px 0 12px;
+  color: #525252;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.why-built-beat h1 {
+  margin: 0;
+  font-family: Newsreader, Georgia, serif;
+  font-size: 98px;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.why-built-beat h1 em {
+  font-style: italic;
+}
+
+.response-workflow-brand {
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  translate: -50% 0;
+}
+
+.response-workflow-heading {
+  position: absolute;
+  top: 92px;
+  right: 80px;
+  left: 80px;
+  text-align: center;
+}
+
+.response-workflow-heading > span {
+  margin: 0 0 8px;
+}
+
+.response-workflow-heading h2 {
+  margin: 0;
+  font-family: Newsreader, Georgia, serif;
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+
+.capability-stack {
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  display: grid;
+  gap: 10px;
+  width: 1080px;
+  translate: -50% 0;
+}
+
+.capability-row {
+  display: grid;
+  grid-template-columns: 50px 112px 360px 1fr;
+  align-items: center;
+  gap: 18px;
+  min-height: 108px;
+  padding: 22px 26px;
+  border: 1px solid #d4d4d4;
+  border-radius: 12px;
+  background: #fff;
+  text-align: left;
+}
+
+.capability-check {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.capability-row > span {
+  color: #525252;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.capability-row > strong {
+  font-family: Newsreader, Georgia, serif;
+  font-size: 29px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.capability-row > small {
+  color: #525252;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.capability-tech {
+  position: absolute;
+  bottom: 46px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  translate: -50% 0;
+  color: #525252;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.capability-tech i {
+  color: #a3a3a3;
+  font-style: normal;
+}
+
+.human-review-copy {
+  position: absolute;
+  top: 86px;
+  right: 80px;
+  left: 80px;
+  text-align: center;
+}
+
+.human-review-copy > span {
+  margin: 0 0 9px;
+}
+
+.human-review-copy h2 {
+  margin: 0;
+  font-family: Newsreader, Georgia, serif;
+  font-size: 76px;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+}
+
+.human-review-flow {
+  position: absolute;
+  top: 330px;
+  left: 50%;
+  display: grid;
+  grid-template-columns: 520px 74px 520px;
+  align-items: center;
+  translate: -50% 0;
+}
+
+.agent-actions,
+.raul-approval {
+  min-height: 250px;
+  padding: 32px;
+  border: 1px solid #d4d4d4;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.agent-actions-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.agent-actions-head b {
+  padding-left: 18px;
+  border-left: 1px solid #e5e5e5;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+}
+
+.action-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.action-row span {
+  padding: 14px 19px;
+  border: 1px solid #d4d4d4;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.review-arrow {
+  color: #525252;
+  font-size: 38px;
+  text-align: center;
+}
+
+.raul-approval {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-color: #0a0a0a;
+  background: #0a0a0a;
+  color: #fff;
+  text-align: center;
+}
+
+.raul-approval span {
+  color: #a3a3a3;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.raul-approval b {
+  margin-top: 13px;
+  font-family: Newsreader, Georgia, serif;
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.raul-approval small {
+  margin-top: 13px;
+  color: #d4d4d4;
+  font-size: 17px;
+}
+
+.human-promise {
+  position: absolute;
+  bottom: 105px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 20px;
+  border: 1px solid #d4d4d4;
+  border-radius: 999px;
+  background: #fff;
+  translate: -50% 0;
+}
+
+.human-promise strong {
+  font-size: 21px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mission-beat > span {
+  margin-top: 23px;
+}
+
+.mission-beat h2 {
+  margin: 0;
+  font-family: Newsreader, Georgia, serif;
+  font-size: 74px;
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.tagline-first,
+.tagline-second {
+  position: absolute;
+  right: 100px;
+  left: 100px;
+  font-family: Newsreader, Georgia, serif;
+  font-size: 96px;
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+}
+
+.tagline-first {
+  top: 365px;
+}
+
+.tagline-second {
+  top: 520px;
+}
+
+.tagline-second em {
+  font-style: italic;
+}
+
+.handoff-beat > span {
+  margin: 22px 0 10px;
+}
+
+.handoff-beat h2 {
+  margin: 0 0 24px;
+  font-family: Newsreader, Georgia, serif;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.05em;
 }
 
 .workflow-brand {
@@ -327,7 +666,7 @@ body {
   margin: 0;
   font-family: Newsreader, Georgia, serif;
   font-size: 60px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.055em;
 }
@@ -335,16 +674,16 @@ body {
 .step-heading p {
   margin: 12px 0 0;
   color: #525252;
-  font-size: 17px;
+  font-size: 24px;
 }
 
 .centered-stage {
   position: absolute;
-  top: 302px;
+  top: 290px;
   left: 50%;
-  width: 820px;
-  height: 590px;
-  padding: 30px 34px;
+  width: 980px;
+  height: 620px;
+  padding: 32px 38px;
   border: 1px solid #d4d4d4;
   border-radius: 14px;
   background: #fff;
@@ -356,18 +695,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 32px;
-  padding-bottom: 15px;
+  height: 42px;
+  padding-bottom: 18px;
   border-bottom: 1px solid #e5e5e5;
   color: #525252;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
 
 .stage-meta strong {
   color: #0a0a0a;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .upload-object {
@@ -382,9 +721,9 @@ body {
   position: absolute;
   top: 18px;
   left: 50%;
-  width: 330px;
-  height: 360px;
-  padding: 34px 34px;
+  width: 380px;
+  height: 380px;
+  padding: 38px 38px;
   border: 1px solid #d4d4d4;
   background: #fff;
   translate: -50% 0;
@@ -394,7 +733,7 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 28px;
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.13em;
 }
@@ -411,9 +750,9 @@ body {
   position: absolute;
   right: 26px;
   bottom: 28px;
-  padding: 8px 10px;
+  padding: 10px 13px;
   border: 1px solid #0a0a0a;
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.12em;
   rotate: -4deg;
@@ -444,29 +783,29 @@ body {
 }
 
 .read-sheet {
-  width: 650px;
+  width: 760px;
   margin: 27px auto 0;
 }
 
 .read-field {
   display: grid;
-  grid-template-columns: 190px 1fr;
+  grid-template-columns: 220px 1fr;
   align-items: center;
-  min-height: 70px;
+  min-height: 78px;
   border-bottom: 1px solid #e5e5e5;
   text-align: left;
 }
 
 .read-field span {
   color: #525252;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
 
 .read-field strong {
   font-family: Newsreader, Georgia, serif;
-  font-size: 25px;
+  font-size: 29px;
   font-weight: 400;
   letter-spacing: -0.025em;
 }
@@ -484,7 +823,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 20px;
 }
 
 .verify-node {
@@ -492,8 +831,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 190px;
-  height: 122px;
+  width: 230px;
+  height: 136px;
   border: 1px solid #d4d4d4;
   border-radius: 12px;
   background: #fff;
@@ -501,7 +840,7 @@ body {
 
 .verify-node span {
   color: #525252;
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.13em;
 }
@@ -509,7 +848,7 @@ body {
 .verify-node b {
   margin-top: 9px;
   font-family: Newsreader, Georgia, serif;
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 400;
   letter-spacing: -0.025em;
 }
@@ -526,7 +865,7 @@ body {
 
 .verify-arrow {
   color: #525252;
-  font-size: 26px;
+  font-size: 32px;
 }
 
 .verification-proof {
@@ -537,16 +876,16 @@ body {
 }
 
 .verification-proof span {
-  padding: 8px 11px;
+  padding: 10px 14px;
   border-radius: 999px;
   background: #f5f5f5;
   color: #525252;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
 }
 
 .connection-object {
-  width: 680px;
+  width: 820px;
   margin: 25px auto 0;
 }
 
@@ -556,25 +895,25 @@ body {
   justify-content: space-between;
   padding-bottom: 16px;
   border-bottom: 1px solid #e5e5e5;
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
 
 .plaid-simple-head b {
-  padding: 6px 9px;
+  padding: 8px 12px;
   border: 1px solid #d4d4d4;
   border-radius: 999px;
-  font-size: 9px;
+  font-size: 15px;
 }
 
 .chosen-account {
   display: grid;
-  grid-template-columns: 52px 1fr auto;
+  grid-template-columns: 62px 1fr auto;
   align-items: center;
   gap: 14px;
   margin: 20px 0;
-  padding: 16px 18px;
+  padding: 20px 22px;
   border-radius: 12px;
   background: #f5f5f5;
   text-align: left;
@@ -583,12 +922,12 @@ body {
 .bank-monogram {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border: 1px solid #d4d4d4;
   border-radius: 50%;
   background: #fff;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
 }
 
@@ -598,20 +937,20 @@ body {
 }
 
 .chosen-account b {
-  font-size: 15px;
+  font-size: 19px;
 }
 
 .chosen-account span {
   margin-top: 3px;
   color: #525252;
-  font-size: 11px;
+  font-size: 15px;
 }
 
 .chosen-account > strong {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: #0a0a0a;
   color: #fff;
@@ -627,8 +966,8 @@ body {
   grid-template-columns: 7px 1fr auto;
   align-items: center;
   gap: 12px;
-  min-height: 50px;
-  padding: 10px 14px;
+  min-height: 58px;
+  padding: 13px 17px;
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   text-align: left;
@@ -642,19 +981,19 @@ body {
 }
 
 .record-stream span {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .record-stream small {
   color: #525252;
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.1em;
 }
 
 .results-object {
-  width: 680px;
+  width: 820px;
   margin: 32px auto 0;
 }
 
@@ -663,21 +1002,21 @@ body {
   align-items: baseline;
   justify-content: center;
   gap: 18px;
-  padding: 21px;
+  padding: 25px;
   border: 1px solid #e5e5e5;
   border-radius: 12px;
 }
 
 .results-summary span {
   color: #525252;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .results-summary b {
   margin-right: 5px;
   color: #0a0a0a;
   font-family: Newsreader, Georgia, serif;
-  font-size: 40px;
+  font-size: 46px;
   font-weight: 400;
 }
 
@@ -696,7 +1035,7 @@ body {
   align-items: center;
   gap: 18px;
   margin-top: 18px;
-  padding: 19px 20px;
+  padding: 23px 24px;
   border: 1px solid #d8b34d;
   border-radius: 12px;
   background: #fff9e8;
@@ -712,19 +1051,19 @@ body {
 .uncertain-record > div:first-child > span {
   margin-bottom: 6px;
   color: #8b6500;
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 800;
   letter-spacing: 0.12em;
 }
 
 .uncertain-record b {
-  font-size: 14px;
+  font-size: 17px;
 }
 
 .uncertain-record small {
   margin-top: 4px;
   color: #525252;
-  font-size: 11px;
+  font-size: 15px;
 }
 
 .review-actions {
@@ -733,12 +1072,12 @@ body {
 }
 
 .review-actions span {
-  padding: 9px 11px;
+  padding: 11px 14px;
   border: 1px solid #0a0a0a;
   border-radius: 999px;
   background: #fff;
   color: #0a0a0a;
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -754,24 +1093,24 @@ body {
   align-items: center;
   gap: 9px;
   margin-top: 20px;
-  padding: 14px 16px;
+  padding: 17px 20px;
   border-radius: 10px;
   background: #f5f5f5;
   text-align: left;
 }
 
 .nothing-sent b {
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .nothing-sent span {
   color: #525252;
-  font-size: 11px;
+  font-size: 15px;
 }
 
 .brief-paper {
-  width: 900px;
-  padding: 42px 48px;
+  width: 1000px;
+  padding: 46px 54px;
   border: 1px solid #d4d4d4;
   border-radius: 14px;
   background: #fff;
@@ -787,10 +1126,10 @@ body {
 }
 
 .brief-paper-head > span {
-  padding: 8px 11px;
+  padding: 10px 14px;
   border-radius: 999px;
   background: #f1c75b;
-  font-size: 9px;
+  font-size: 15px;
   font-weight: 800;
   letter-spacing: 0.1em;
 }
@@ -799,7 +1138,7 @@ body {
   display: block;
   margin-top: 28px;
   color: #525252;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.14em;
 }
@@ -808,7 +1147,7 @@ body {
   margin: 10px 0 25px;
   font-family: Newsreader, Georgia, serif;
   font-size: 54px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.05em;
 }
@@ -818,11 +1157,11 @@ body {
   align-items: center;
   justify-content: center;
   gap: 18px;
-  padding: 17px 20px;
+  padding: 20px 24px;
   border-radius: 10px;
   background: #0a0a0a;
   color: #fff;
-  font-size: 11px;
+  font-size: 15px;
   letter-spacing: 0.08em;
 }
 
@@ -840,14 +1179,14 @@ body {
 
 .brief-footer > span {
   color: #525252;
-  font-size: 11px;
+  font-size: 15px;
 }
 
 .end-beat h1 {
   margin: 26px 0 0;
   font-family: Newsreader, Georgia, serif;
   font-size: 84px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 0.93;
   letter-spacing: -0.06em;
 }
@@ -860,18 +1199,18 @@ body {
 .end-beat > p {
   margin: 24px 0;
   color: #525252;
-  font-size: 20px;
+  font-size: 26px;
 }
 
 .demo-cue {
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  padding: 14px 18px 14px 22px;
+  padding: 16px 20px 16px 25px;
   border-radius: 999px;
   background: #0a0a0a;
   color: #fff;
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
@@ -893,7 +1232,7 @@ body {
   gap: 12px;
   margin-top: 24px;
   color: #525252;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -904,5 +1243,5 @@ body {
 .end-beat > small {
   margin-top: 9px;
   color: #a3a3a3;
-  font-size: 9px;
+  font-size: 14px;
 }
