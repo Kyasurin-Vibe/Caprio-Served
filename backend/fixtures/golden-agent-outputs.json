@@ -6,29 +6,29 @@
       "reader": {
         "doc_type": "Federal court filing",
         "court": "United States District Court, Central District of California",
-        "case_number": "5:25-cv-02108-KK-SP",
+        "case_number": "5:25-cv-00000-AA-BB",
         "parties": [
-          "Audrea Barnes",
-          "Maximus Consulting Services"
+          "John Doe",
+          "Acme Consulting Services"
         ],
         "document_date": null,
         "deadline": null,
         "demands": [],
-        "visible_text": "UNITED STATES DISTRICT COURT CENTRAL DISTRICT OF CALIFORNIA\nAUDREA BARNES, Plaintiff, v. MAXIMUS CONSULTING SERVICES, Defendant.\nCase No. 5:25-cv-02108-KK-SP",
+        "visible_text": "UNITED STATES DISTRICT COURT CENTRAL DISTRICT OF CALIFORNIA\nJOHN DOE, Plaintiff, v. ACME CONSULTING SERVICES, Defendant.\nCase No. 5:25-cv-00000-AA-BB",
         "readable": true
       },
       "checker": {
         "docket_evidence": [
           {
-            "case_number_normalized": "5:25-cv-02108",
+            "case_number_normalized": "5:25-cv-00000",
             "court_id": "cacd",
-            "case_title": "Barnes v. Maximus Consulting Services",
+            "case_title": "Doe v. Acme Consulting Services",
             "parties": [
-              "Audrea Barnes",
-              "Maximus Consulting Services"
+              "John Doe",
+              "Acme Consulting Services"
             ],
             "filing_date": "2025-09-26",
-            "docket_url": "https://www.courtlistener.com/docket/5:25-cv-02108/",
+            "docket_url": "https://www.courtlistener.com/docket/5:25-cv-00000/",
             "source": "recap"
           }
         ],
@@ -48,15 +48,15 @@
       "reader": {
         "doc_type": "Federal court filing",
         "court": "United States District Court, Central District of California",
-        "case_number": "5:25-cv-92108-KK-SP",
+        "case_number": "5:25-cv-90000-AA-BB",
         "parties": [
-          "Audrea Barnes",
-          "Maximus Consulting Services"
+          "John Doe",
+          "Acme Consulting Services"
         ],
         "document_date": null,
         "deadline": null,
         "demands": [],
-        "visible_text": "UNITED STATES DISTRICT COURT CENTRAL DISTRICT OF CALIFORNIA\nAUDREA BARNES, Plaintiff, v. MAXIMUS CONSULTING SERVICES, Defendant.\nCase No. 5:25-cv-92108-KK-SP",
+        "visible_text": "UNITED STATES DISTRICT COURT CENTRAL DISTRICT OF CALIFORNIA\nJOHN DOE, Plaintiff, v. ACME CONSULTING SERVICES, Defendant.\nCase No. 5:25-cv-90000-AA-BB",
         "readable": true
       },
       "checker": {
@@ -64,15 +64,15 @@
         "case_found": false,
         "parties_match": false,
         "near_match": {
-          "case_number_normalized": "5:25-cv-02108",
+          "case_number_normalized": "5:25-cv-00000",
           "court_id": "cacd",
-          "case_title": "Barnes v. Maximus Consulting Services",
+          "case_title": "Doe v. Acme Consulting Services",
           "parties": [
-            "Audrea Barnes",
-            "Maximus Consulting Services"
+            "John Doe",
+            "Acme Consulting Services"
           ],
           "filing_date": "2025-09-26",
-          "docket_url": "https://www.courtlistener.com/docket/5:25-cv-02108/",
+          "docket_url": "https://www.courtlistener.com/docket/5:25-cv-00000/",
           "source": "recap"
         },
         "court_lookup_status": "near_match",
@@ -136,31 +136,31 @@
       "reader": {
         "doc_type": "Subpoena to produce payment and bank records",
         "court": "United States District Court, Central District of California",
-        "case_number": "5:25-cv-02108-KK-SP",
+        "case_number": "5:25-cv-00000-AA-BB",
         "parties": [
-          "Audrea Barnes",
-          "Maximus Consulting Services"
+          "John Doe",
+          "Acme Consulting Services"
         ],
         "document_date": "2026-07-16",
         "deadline": "2026-08-14T10:00:00",
         "demands": [
-          "All records of payments made to or for the benefit of Audrea Barnes from January 1, 2026 to the present, including payroll payments, bonuses, reimbursements, tip distributions, and bank records reflecting such payments."
+          "All records of payments made to or for the benefit of John Doe from January 1, 2026 to the present, including payroll payments, bonuses, reimbursements, tip distributions, and bank records reflecting such payments."
         ],
-        "visible_text": "UNITED STATES DISTRICT COURT CENTRAL DISTRICT OF CALIFORNIA\nAUDREA BARNES, Plaintiff, v. MAXIMUS CONSULTING SERVICES, Defendant.\nCase No. 5:25-cv-02108-KK-SP\nAll records of payments made to or for the benefit of Audrea Barnes from January 1, 2026 to the present, including payroll payments, bonuses, reimbursements, and tip distributions, and bank records reflecting such payments.\nDate: July 16, 2026\nSPECIMEN - TRAINING USE ONLY",
+        "visible_text": "UNITED STATES DISTRICT COURT CENTRAL DISTRICT OF CALIFORNIA\nJOHN DOE, Plaintiff, v. ACME CONSULTING SERVICES, Defendant.\nCase No. 5:25-cv-00000-AA-BB\nAll records of payments made to or for the benefit of John Doe from January 1, 2026 to the present, including payroll payments, bonuses, reimbursements, and tip distributions, and bank records reflecting such payments.\nDate: July 16, 2026\nSPECIMEN - TRAINING USE ONLY",
         "readable": true
       },
       "checker": {
         "docket_evidence": [
           {
-            "case_number_normalized": "5:25-cv-02108",
+            "case_number_normalized": "5:25-cv-00000",
             "court_id": "cacd",
-            "case_title": "Barnes v. Maximus Consulting Services",
+            "case_title": "Doe v. Acme Consulting Services",
             "parties": [
-              "Audrea Barnes",
-              "Maximus Consulting Services"
+              "John Doe",
+              "Acme Consulting Services"
             ],
             "filing_date": "2025-09-26",
-            "docket_url": "https://www.courtlistener.com/docket/5:25-cv-02108/",
+            "docket_url": "https://www.courtlistener.com/docket/5:25-cv-00000/",
             "source": "recap"
           }
         ],

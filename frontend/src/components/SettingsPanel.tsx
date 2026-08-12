@@ -274,7 +274,7 @@ export function SettingsPanel({
         setBankState("ready")
         await loadBank(token)
       } catch (cause: unknown) {
-        setBankError(cause instanceof Error ? cause.message : "Unable to connect the sample bank.")
+        setBankError(cause instanceof Error ? cause.message : "Unable to open the D4 judge fixture.")
       } finally {
         setLocalBankConnecting(false)
       }
@@ -473,7 +473,7 @@ export function SettingsPanel({
                   <p className="mt-3 text-sm font-medium text-zinc-800">No bank linked</p>
                   <p className="mt-2 text-xs leading-5 text-zinc-500">
                     {demoMode
-                      ? "Open the reviewed Mendoza’s Kitchen D4 fixture anytime—no saved subpoena required."
+                      ? "Open the reviewed Roe’s Kitchen D4 fixture anytime—no saved subpoena required."
                       : bankConnectAnalysisId
                         ? "Connect a realistic Plaid sandbox account, or use the separate D4 judge fixture for the exact expected result."
                         : "Connect a realistic Plaid sandbox account. The D4 judge fixture remains available for the seeded legal-request demo."}

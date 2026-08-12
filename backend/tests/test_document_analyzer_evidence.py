@@ -112,15 +112,15 @@ def test_analysis_emits_the_canonical_corpus_quote_without_rewriting() -> None:
 def test_case_number_hit_without_party_match_is_not_labeled_as_verified() -> None:
     parsed = DocumentParse(
         doc_type="Court notice",
-        case_number="5:25-cv-02108",
+        case_number="5:25-cv-00000",
         parties=["Different Person", "Different Company"],
         visible_text="Court notice",
     )
     record = DocketEvidence(
-        case_number_normalized="5:25-cv-02108",
+        case_number_normalized="5:25-cv-00000",
         court_id="cacd",
-        case_title="Barnes v. Maximus Consulting Services",
-        parties=["Audrea Barnes", "Maximus Consulting Services"],
+        case_title="Doe v. Acme Consulting Services",
+        parties=["John Doe", "Acme Consulting Services"],
         filing_date="2025-01-01",
         docket_url="https://www.courtlistener.com/example",
         source="recap",

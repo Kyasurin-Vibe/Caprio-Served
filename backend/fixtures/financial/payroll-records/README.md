@@ -5,9 +5,9 @@ their verdict tests. It begins only after D1 has already returned `VERIFIED`.
 
 ## Demo story
 
-D1 asks Mendoza's Kitchen, LLC for:
+D1 asks Roe's Kitchen, LLC for:
 
-> All payroll records, wage statements, and time records for Audrea Barnes,
+> All payroll records, wage statements, and time records for John Doe,
 > from January 1, 2026 to the present.
 
 For deterministic replay, this fixture locks "present" to **2026-07-15**, the
@@ -39,7 +39,7 @@ verdict:
 
 - **275 records searched**
 - **21 exact candidates matched**: seven monthly packets x three D1-requested
-  categories for Audrea Barnes
+  categories for John Doe
 - **7 records need review**: identity, date-boundary, category-mapping,
   duplicate, and missing-date ambiguities
 - **247 records kept outside**: 180 records for other employees, 40 records

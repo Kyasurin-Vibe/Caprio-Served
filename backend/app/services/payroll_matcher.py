@@ -90,15 +90,15 @@ def extract_payroll_criteria(analysis: AnalysisResponse) -> PayrollRequestCriter
 
     # Keep the shipped D1 demo deterministic even when a legacy reader snapshot
     # omitted the request sentence but retained the verified case and named party.
-    if analysis.breakdown.case_number == "5:25-cv-02108-KK-SP":
-        if not employee_name and "Audrea Barnes" in analysis.breakdown.parties:
-            employee_name = "Audrea Barnes"
+    if analysis.breakdown.case_number == "5:25-cv-00000-AA-BB":
+        if not employee_name and "John Doe" in analysis.breakdown.parties:
+            employee_name = "John Doe"
         if not start_date:
             start_date = "2026-01-01"
         if not requested_types:
             requested_types = ["payroll_record", "wage_statement", "time_record"]
         if not source:
-            source = "All payroll records, wage statements, and time records for Audrea Barnes, from January 1, 2026 to the present."
+            source = "All payroll records, wage statements, and time records for John Doe, from January 1, 2026 to the present."
 
     if not employee_name or not start_date or not requested_types:
         raise PayrollMatchError(

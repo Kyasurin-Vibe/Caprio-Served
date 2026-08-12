@@ -639,7 +639,7 @@ async def exchange_token(
 async def _save_local_d4_sample_connection(
     profile,
     *,
-    institution_name: str = "Mendoza’s Kitchen · D4 sample",
+    institution_name: str = "Roe’s Kitchen · D4 sample",
 ) -> PlaidConnectionStatus:
     """Persist the reviewed D4 fixture locally (matching uses fixture rows, not Plaid sync)."""
     return await _save_connection(
@@ -655,7 +655,7 @@ async def _save_local_d4_sample_connection(
 
 
 async def _connect_seeded_sandbox_bank(profile, *, log_label: str) -> PlaidConnectionStatus:
-    """Connect the Mendoza D4 Plaid Sandbox item for this user (no analysis required)."""
+    """Connect the Roe D4 Plaid Sandbox item for this user (no analysis required)."""
     demo_profile = is_demo_profile(profile)
     subject_hint = profile.subject[:12] + "…" if len(profile.subject) > 12 else profile.subject
     logger.info(
@@ -677,7 +677,7 @@ async def _connect_seeded_sandbox_bank(profile, *, log_label: str) -> PlaidConne
     if demo_profile:
         return await _save_local_d4_sample_connection(
             profile,
-            institution_name="Mendoza’s Kitchen Sandbox",
+            institution_name="Roe’s Kitchen Sandbox",
         )
     if settings.plaid_environment in ("sandbox", "development"):
         if not D4_PLAID_FIXTURE.is_file():
@@ -760,9 +760,9 @@ async def match_transactions(
         raise HTTPException(
             status_code=409,
             detail=(
-                "Connect the Mendoza’s Kitchen sample account for the D4 demo "
+                "Connect the Roe’s Kitchen sample account for the D4 demo "
                 "(7 include, 2 review, 19 exclude). Generic sandbox banks such as "
-                "Bank of America or American Express do not contain Audrea Barnes payments."
+                "Bank of America or American Express do not contain John Doe payments."
             ),
         )
 

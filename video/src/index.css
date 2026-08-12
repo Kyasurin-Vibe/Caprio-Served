@@ -234,7 +234,7 @@ body {
   letter-spacing: -0.05em;
 }
 
-.raul-wrap {
+.owner-wrap {
   position: absolute;
   top: 310px;
   left: 50%;
@@ -243,7 +243,7 @@ body {
   translate: -50% 0;
 }
 
-.raul-figure {
+.owner-figure {
   display: block;
   width: 100%;
 }
@@ -495,7 +495,7 @@ body {
 }
 
 .agent-actions,
-.raul-approval {
+.owner-approval {
   min-height: 250px;
   padding: 32px;
   border: 1px solid #d4d4d4;
@@ -541,7 +541,7 @@ body {
   text-align: center;
 }
 
-.raul-approval {
+.owner-approval {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -552,14 +552,14 @@ body {
   text-align: center;
 }
 
-.raul-approval span {
+.owner-approval span {
   color: #a3a3a3;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.14em;
 }
 
-.raul-approval b {
+.owner-approval b {
   margin-top: 13px;
   font-family: Newsreader, Georgia, serif;
   font-size: 40px;
@@ -567,7 +567,7 @@ body {
   letter-spacing: -0.035em;
 }
 
-.raul-approval small {
+.owner-approval small {
   margin-top: 13px;
   color: #d4d4d4;
   font-size: 17px;

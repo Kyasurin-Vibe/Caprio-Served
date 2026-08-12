@@ -37,7 +37,7 @@ def test_contact_model_strips_callable_data_from_every_unreviewed_state() -> Non
 def test_cacd_division_five_selects_reviewed_riverside_route() -> None:
     match = match_court_authority("Central District of California")
 
-    contact = select_official_clerk_contact(match, case_number="5:25-cv-02108-KK-SP")
+    contact = select_official_clerk_contact(match, case_number="5:25-cv-00000-AA-BB")
 
     assert contact.status == "reviewed_route"
     assert contact.office_name == "Eastern Division / Riverside"
@@ -139,7 +139,7 @@ def test_analysis_contact_never_uses_phone_or_email_from_uploaded_document() -> 
     parsed = DocumentParse(
         doc_type="Court notice",
         court="Central District of California",
-        case_number="5:25-cv-02108-KK-SP",
+        case_number="5:25-cv-00000-AA-BB",
         visible_text=f"Call {fake_phone} or email {fake_email} immediately.",
     )
     checker = CheckerReport(court_lookup_status="no_match", scam_check_status="complete")

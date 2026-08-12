@@ -84,7 +84,7 @@ def normalize_case_number(value: str) -> str:
     federal = FEDERAL_DOCKET.search(value)
     if federal:
         # CourtListener commonly stores the core federal docket number without
-        # judge/magistrate suffixes printed on filings (for example -KK-SP).
+        # judge/magistrate suffixes printed on filings (for example -AA-BB).
         return "".join(federal.group("division", "year", "kind", "serial"))
     return re.sub(r"[^a-z0-9]", "", value.lower()).lstrip("0")
 
@@ -174,7 +174,7 @@ def _candidate_party_tokens(case_name: str, parties: list[str]) -> list[set[str]
 
 
 def _party_match_score(expected: set[str], candidate: set[str]) -> int:
-    # One side may be abbreviated ("Barnes" for "Audrea Barnes"), but partial
+    # One side may be abbreviated ("Doe" for "John Doe"), but partial
     # cross-name overlap ("John Smith" vs. "Jane Smith") is not a match.
     if expected <= candidate or candidate <= expected:
         return len(expected & candidate)
@@ -202,7 +202,7 @@ def _party_overlap(expected: list[str], case_name: str, parties: list[str]) -> b
         return best
 
     # Every caption side must match a distinct candidate, with at least two
-    # distinctive tokens overall. This preserves "Barnes v. Maximus" while a
+    # distinctive tokens overall. This preserves "Doe v. Acme" while a
     # single common surname remains insufficient.
     return best_assignment(0, frozenset()) >= 2
 

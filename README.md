@@ -8,7 +8,7 @@
 
 The product goes beyond explaining a document. It helps find the requested records while keeping unrelated employees, vendors, and transactions out.
 
-In our demo, Raul Mendoza, a restaurant owner who moved from Mexico, receives a financial subpoena addressed to Mendoza’s Kitchen, LLC. Served explains the request, checks the referenced case against the public federal docket, extracts the named person and date range, and then opens the correct record path. D1 matches payroll records. D4 searches authenticated business-bank transactions and produces the demo’s 7 include, 2 review, and 19 exclude result. D2 and D3 show why uncertain or suspicious requests must fail closed before financial access.
+In our demo, Richard Roe, a restaurant owner who moved from Mexico, receives a financial subpoena addressed to Roe’s Kitchen, LLC. Served explains the request, checks the referenced case against the public federal docket, extracts the named person and date range, and then opens the correct record path. D1 matches payroll records. D4 searches authenticated business-bank transactions and produces the demo’s 7 include, 2 review, and 19 exclude result. D2 and D3 show why uncertain or suspicious requests must fail closed before financial access.
 Three narrowly scoped AI agents gather and explain the document evidence. An optional fourth worker, COOK, retrieves authenticated business-bank records after the document result. A small deterministic code policy—not an AI model—selects the legal-mail outcome.
 
 ```text
@@ -189,7 +189,7 @@ The release fixtures make the four branches easy to inspect:
 | `D1.pdf` | Referenced federal case is found and parties match | `VERIFIED` |
 | `D2.pdf` | The case number is altered, so the required match is not established | `CANNOT_CONFIRM` |
 | `D3.pdf` | Two or more countable, sourced warning signs are supported by the letter text | `SCAM INDICATORS` |
-| `D4.pdf` | Verified request for payment and bank records for Audrea Barnes | `VERIFIED`, then 7 include / 2 review / 19 exclude |
+| `D4.pdf` | Verified request for payment and bank records for John Doe | `VERIFIED`, then 7 include / 2 review / 19 exclude |
 
 The specimens are training fixtures, not valid legal documents. Personal, attorney, and contact details are fictionalized. Expected outcomes and golden agent outputs live in [`backend/fixtures/`](backend/fixtures/), so the demo contract does not depend on a live API response remaining unchanged.
 

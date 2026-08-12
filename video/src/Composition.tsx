@@ -127,7 +127,7 @@ const RestaurantSketch = ({muted = false, animated = false}: {muted?: boolean; a
         </g>
       </g>
       <text x="550" y="284" textAnchor="middle" fill="currentColor" fontFamily="IBM Plex Sans, Arial" fontSize="14" fontWeight="700" letterSpacing="2" style={{opacity: openSign}}>OPEN</text>
-      <text x="410" y="120" textAnchor="middle" fill="currentColor" fontFamily="IBM Plex Sans, Arial" fontSize="27" fontWeight="700" letterSpacing="7" style={{opacity: lettering}}>RAUL&apos;S</text>
+      <text x="410" y="120" textAnchor="middle" fill="currentColor" fontFamily="IBM Plex Sans, Arial" fontSize="27" fontWeight="700" letterSpacing="7" style={{opacity: lettering}}>RICHARD&apos;S</text>
       <text x="410" y="352" textAnchor="middle" fill="currentColor" fontFamily="IBM Plex Sans, Arial" fontSize="17" fontWeight="600" letterSpacing="3.4" style={{opacity: lettering}}>SMALL RESTAURANT · BUILT ONE DAY AT A TIME</text>
     </svg>
   );
@@ -145,8 +145,8 @@ const EnvelopeSketch = () => (
   </svg>
 );
 
-const RaulFigure = () => (
-  <svg className="raul-figure" viewBox="0 0 300 430" fill="none" aria-hidden="true">
+const RichardFigure = () => (
+  <svg className="owner-figure" viewBox="0 0 300 430" fill="none" aria-hidden="true">
     <g stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="150" cy="70" r="48"/>
       <path d="M127 70h2M171 70h2"/>
@@ -180,7 +180,7 @@ const RestaurantBeat = () => {
         <h1 style={{
           opacity: interpolate(frame, [112, 122], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
           translate: interpolate(frame, [112, 172], ["0px 14px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
-        }}>Raul&apos;s restaurant<br/><em>is already struggling.</em></h1>
+        }}>Richard&apos;s restaurant<br/><em>is already struggling.</em></h1>
       </div>
     </AbsoluteFill>
   );
@@ -242,7 +242,7 @@ const LetterBeat = () => {
         <h1 style={{
           opacity: interpolate(frame, [26, 36], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
           translate: interpolate(frame, [26, 84], ["0px 14px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
-        }}>Raul is <em>served.</em></h1>
+        }}>Richard is <em>served.</em></h1>
       </div>
     </AbsoluteFill>
   );
@@ -274,17 +274,17 @@ const QuestionsBeat = () => {
   return (
     <AbsoluteFill className="question-canvas">
       <div className="question-heading">
-        <span style={{opacity: interpolate(frame, [4, 38], [0, 1], {extrapolateRight: "clamp", easing: editorialEase})}}>RAUL DOESN&apos;T KNOW WHAT TO DO</span>
+        <span style={{opacity: interpolate(frame, [4, 38], [0, 1], {extrapolateRight: "clamp", easing: editorialEase})}}>RICHARD DOESN&apos;T KNOW WHAT TO DO</span>
         <h2 style={{
           opacity: interpolate(frame, [12, 22], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
           translate: interpolate(frame, [12, 64], ["0px 12px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
         }}>The letter arrived.<br/>The next step did not.</h2>
       </div>
-      <div className="raul-wrap" style={{
+      <div className="owner-wrap" style={{
         opacity: interpolate(frame, [0, 34], [0, 1], {extrapolateRight: "clamp", easing: ease}),
         translate: interpolate(frame, [0, 44, 250], ["-50% 24px", "-50% 0px", "-50% -4px"], {extrapolateRight: "clamp", easing: editorialEase}),
         scale: interpolate(frame, [0, 50], [0.96, 1], {extrapolateRight: "clamp", easing: ease}),
-      }}><RaulFigure/></div>
+      }}><RichardFigure/></div>
       {questions.map((question) => <QuestionChip key={question.text} {...question}/>)}
     </AbsoluteFill>
   );
@@ -304,7 +304,7 @@ const SolutionBeat = () => {
         opacity: interpolate(frame, [30, 40], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
         translate: interpolate(frame, [30, 72], ["0px 14px", "0px 0px"], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: editorialEase}),
       }}>Served solves this.</h1>
-      <p style={{opacity: interpolate(frame, [52, 82], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>A clear next step—without asking Raul to become a lawyer.</p>
+      <p style={{opacity: interpolate(frame, [52, 82], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>A clear next step—without asking Richard to become a lawyer.</p>
     </AbsoluteFill>
   );
 };
@@ -327,7 +327,7 @@ const FounderBeat = () => {
     }}><PhoneSketch/></div>
     <FounderStatement from={0} to={120}><span>THIS PROBLEM IS PERSONAL</span><h2>I worked as a legal assistant<br/>in law offices for many years.</h2></FounderStatement>
     <FounderStatement from={110} to={320}><span>THE GAP I SAW</span><h2>For many law firms, these matters are simply too small<br/>to justify the time and cost of an attorney—<br/><em>and they won&apos;t take them.</em></h2></FounderStatement>
-    <FounderStatement from={310} to={432}><span>THE OWNER IS STILL WAITING</span><h2>But owners like Raul just want to know:<br/><em>what do I do next?</em></h2></FounderStatement>
+    <FounderStatement from={310} to={432}><span>THE OWNER IS STILL WAITING</span><h2>But owners like Richard just want to know:<br/><em>what do I do next?</em></h2></FounderStatement>
     <FounderStatement from={420} to={624}><span>EVEN WITH A LAWYER</span><h2>Even when an attorney reviews the document,<br/>much of the work still falls on you.</h2></FounderStatement>
   </AbsoluteFill>;
 };
@@ -411,10 +411,10 @@ const HumanReviewBeat = () => {
         </div>
       </div>
       <div className="review-arrow" style={{opacity: interpolate(frame, [70, 92], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease})}}>→</div>
-      <div className="raul-approval" style={{
+      <div className="owner-approval" style={{
         opacity: interpolate(frame, [82, 108], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
         scale: interpolate(frame, [82, 108], [0.96, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
-      }}><span>FINAL CONTROL</span><b>RAUL APPROVES</b><small>Include · Keep out · Ask for help</small></div>
+      }}><span>FINAL CONTROL</span><b>RICHARD APPROVES</b><small>Include · Keep out · Ask for help</small></div>
     </div>
     <div className="human-promise" style={{
       opacity: interpolate(frame, [112, 140], [0, 1], {extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease}),
@@ -480,10 +480,10 @@ export const ServedStory = () => (
     <Sequence name="Founder voiceover" from={930} durationInFrames={1507}>
       <Audio src={staticFile("audio/founder-personal-0721.mp3")}/>
     </Sequence>
-    <Sequence name="Raul's restaurant" durationInFrames={210}><BeatFade duration={210}><RestaurantBeat/></BeatFade></Sequence>
+    <Sequence name="Richard's restaurant" durationInFrames={210}><BeatFade duration={210}><RestaurantBeat/></BeatFade></Sequence>
     <Sequence name="A hard month" from={210} durationInFrames={150}><BeatFade duration={150}><PressureBeat/></BeatFade></Sequence>
     <Sequence name="The letter arrives" from={360} durationInFrames={180}><BeatFade duration={180}><LetterBeat/></BeatFade></Sequence>
-    <Sequence name="Raul's questions" from={540} durationInFrames={270}><BeatFade duration={270}><QuestionsBeat/></BeatFade></Sequence>
+    <Sequence name="Richard's questions" from={540} durationInFrames={270}><BeatFade duration={270}><QuestionsBeat/></BeatFade></Sequence>
     <Sequence name="Served solves this" from={810} durationInFrames={120}><BeatFade duration={120}><SolutionBeat/></BeatFade></Sequence>
     <Sequence name="Founder connection" from={930} durationInFrames={624}><BeatFade duration={624} fadeIn={10} fadeOut={10}><FounderBeat/></BeatFade></Sequence>
     <Sequence name="Why we built Served" from={1554} durationInFrames={73}><BeatFade duration={73} fadeIn={10} fadeOut={10}><WhyBuiltBeat/></BeatFade></Sequence>
@@ -496,5 +496,5 @@ export const ServedStory = () => (
 );
 
 export const MyComposition = () => (
-  <Composition id="Served-Raul-Story" component={ServedStory} durationInFrames={2437} fps={30} width={1920} height={1080}/>
+  <Composition id="Served-Richard-Story" component={ServedStory} durationInFrames={2437} fps={30} width={1920} height={1080}/>
 );

@@ -29,9 +29,9 @@ def _authenticate(authorization: str):
     return _verify_google_token(token)
 
 
-@router.get("/samples/mendoza-kitchen.csv", response_class=FileResponse)
+@router.get("/samples/roe-kitchen.csv", response_class=FileResponse)
 async def sample_payroll() -> FileResponse:
-    path = FIXTURES / "mendoza-kitchen-payroll.csv"
+    path = FIXTURES / "roe-kitchen-payroll.csv"
     if not path.is_file():
         raise HTTPException(status_code=404, detail="Sample payroll export not available.")
     return FileResponse(path, media_type="text/csv", filename=path.name)
@@ -71,7 +71,7 @@ async def match_payroll_records(
 
     data = await file.read(MAX_PAYROLL_CSV_BYTES + 1)
     if is_demo_profile(profile):
-        sample = FIXTURES / "mendoza-kitchen-payroll.csv"
+        sample = FIXTURES / "roe-kitchen-payroll.csv"
         if (
             not sample.is_file()
             or hashlib.sha256(data).digest()

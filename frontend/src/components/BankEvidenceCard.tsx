@@ -275,22 +275,22 @@ export function BankEvidenceCard({ analysis, analysisId, documentName, cutoffDat
     setError(null)
     try {
       if (status?.connected && !status.demo_fixture) {
-        setBusyLabel("Switching to sample account…")
+        setBusyLabel("Switching to the D4 judge fixture…")
         await disconnectPlaidConnection(accessCredential)
         setStatus((current) => (current ? { ...current, connected: false, demo_fixture: false, institution_name: null } : current))
         setRecords(null)
         autoMatchStarted.current = false
       }
-      setBusyLabel("Connecting Mendoza’s Kitchen sample account…")
+      setBusyLabel("Opening the Roe’s Kitchen D4 fixture…")
       const nextStatus = await connectPlaidSandboxDemo(analysisId, accessCredential)
       setStatus(nextStatus)
-      setBusyLabel("Matching Audrea Barnes payments…")
+      setBusyLabel("Matching John Doe payments…")
       const nextRecords = await matchPlaidTransactions(analysisId, accessCredential, confirmedCutoff)
       await holdTransactionLoading(startedAt)
       setRecords(nextRecords)
       autoMatchStarted.current = true
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "The sample account could not be connected.")
+      setError(cause instanceof Error ? cause.message : "The D4 judge fixture could not be opened.")
     } finally {
       setBusy(false)
       setBusyLabel(null)
@@ -504,11 +504,11 @@ export function BankEvidenceCard({ analysis, analysisId, documentName, cutoffDat
           <AlertTitle>Not the D4 demo bank</AlertTitle>
           <AlertDescription className="space-y-2 text-white/75">
             <p>
-              Generic Plaid sandbox banks (Bank of America, American Express, etc.) do not include Audrea Barnes payments.
-              Connect the Mendoza’s Kitchen sample for 7 include, 2 review, 19 exclude.
+              Generic Plaid sandbox banks (Bank of America, American Express, etc.) do not include John Doe payments.
+              Open the Roe’s Kitchen D4 fixture for 7 include, 2 review, 19 exclude.
             </p>
             <Button type="button" className="h-9 bg-white text-black hover:bg-white/90" disabled={busy} onClick={() => { void connectSampleAccount() }}>
-              <Landmark size={15} /> Switch to sample account
+              <Landmark size={15} /> Use D4 judge fixture
             </Button>
           </AlertDescription>
         </Alert>
@@ -516,8 +516,8 @@ export function BankEvidenceCard({ analysis, analysisId, documentName, cutoffDat
 
       {error && <Alert className="mt-4 border-red-400/30 bg-red-400/10 text-white"><AlertTitle>Could not complete that step</AlertTitle><AlertDescription className="text-white/70">{error}</AlertDescription></Alert>}
 
-      {!status.connected ? <div className="mt-5 rounded-2xl bg-white/[.07] p-4 sm:p-5"><div className="flex flex-wrap gap-2"><Button className="h-12 w-full bg-white text-sm font-medium text-black hover:bg-white/90 sm:w-auto sm:px-7" disabled={busy} onClick={() => { void connect() }}>{busy ? <LoaderCircle className="animate-spin" size={17} /> : <Landmark size={17} />}{busyLabel || (credential ? "Connect realistic Plaid bank" : "Open D4 judge fixture")}</Button>{credential && demoPlaid && <Button variant="outline" className="h-12 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white" disabled={busy} onClick={() => { void connectSampleAccount() }}><DatabaseZap size={17} />Use D4 judge fixture</Button>}</div>{demoPlaid && <p className="type-caption mt-2 text-white/40">{credential ? "Plaid Link provides general sandbox transactions unrelated to Audrea. The separate D4 fixture preserves the exact 7 / 2 / 19 judging flow." : "Loads the reviewed D4 fixture for the exact judging flow."}</p>}</div> : <div className="mt-5 rounded-2xl bg-white/[.07] p-4">
-        <div className="flex flex-wrap items-center justify-between gap-3"><div className="flex items-center gap-2"><CheckCircle2 className="text-white" size={18} /><div><p className="type-ui font-medium text-white">{status.institution_name || "Bank connected"}</p>{status.demo_fixture && <p className="type-caption mt-0.5 text-white/40">Mendoza’s Kitchen · Business checking · 28 transactions</p>}</div></div><div className="flex flex-wrap items-end gap-2">{wrongDemoBank && <Button variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white" disabled={busy} onClick={() => { void connectSampleAccount() }}><Landmark size={15} />Use sample account</Button>}<label className="type-caption text-white/50">Through<input className="mt-1 block h-9 rounded-xl border border-white/15 bg-black/20 px-3 text-xs text-white" type="date" value={confirmedCutoff} onChange={(event) => setConfirmedCutoff(event.target.value)} /></label><Button className="bg-white text-black hover:bg-white/90" disabled={busy || !confirmedCutoff || (demoPlaid && !status.demo_fixture)} onClick={() => { void matchRecords() }}>{busy ? <LoaderCircle className="animate-spin" size={16} /> : <DatabaseZap size={16} />}{busyLabel || "Get transactions"}</Button></div></div>
+      {!status.connected ? <div className="mt-5 rounded-2xl bg-white/[.07] p-4 sm:p-5"><div className="flex flex-wrap gap-2"><Button className="h-12 w-full bg-white text-sm font-medium text-black hover:bg-white/90 sm:w-auto sm:px-7" disabled={busy} onClick={() => { void connect() }}>{busy ? <LoaderCircle className="animate-spin" size={17} /> : <Landmark size={17} />}{busyLabel || (credential ? "Connect realistic Plaid bank" : "Open D4 judge fixture")}</Button>{credential && demoPlaid && <Button variant="outline" className="h-12 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white" disabled={busy} onClick={() => { void connectSampleAccount() }}><DatabaseZap size={17} />Use D4 judge fixture</Button>}</div>{demoPlaid && <p className="type-caption mt-2 text-white/40">{credential ? "Plaid Link provides general sandbox transactions unrelated to John. The separate D4 fixture preserves the exact 7 / 2 / 19 judging flow." : "Loads the reviewed D4 fixture for the exact judging flow."}</p>}</div> : <div className="mt-5 rounded-2xl bg-white/[.07] p-4">
+        <div className="flex flex-wrap items-center justify-between gap-3"><div className="flex items-center gap-2"><CheckCircle2 className="text-white" size={18} /><div><p className="type-ui font-medium text-white">{status.institution_name || "Bank connected"}</p>{status.demo_fixture && <p className="type-caption mt-0.5 text-white/40">Roe’s Kitchen · Business checking · 28 transactions</p>}</div></div><div className="flex flex-wrap items-end gap-2">{wrongDemoBank && <Button variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white" disabled={busy} onClick={() => { void connectSampleAccount() }}><Landmark size={15} />Use D4 judge fixture</Button>}<label className="type-caption text-white/50">Through<input className="mt-1 block h-9 rounded-xl border border-white/15 bg-black/20 px-3 text-xs text-white" type="date" value={confirmedCutoff} onChange={(event) => setConfirmedCutoff(event.target.value)} /></label><Button className="bg-white text-black hover:bg-white/90" disabled={busy || !confirmedCutoff || (demoPlaid && !status.demo_fixture)} onClick={() => { void matchRecords() }}>{busy ? <LoaderCircle className="animate-spin" size={16} /> : <DatabaseZap size={16} />}{busyLabel || "Get transactions"}</Button></div></div>
         {busy && <TransactionLoader label={busyLabel} />}
       </div>}
     </div>
@@ -527,9 +527,9 @@ export function BankEvidenceCard({ analysis, analysisId, documentName, cutoffDat
         <Alert className="mb-4 border-white/25 bg-white/10 text-white">
           <AlertTitle>These counts are not the D4 demo</AlertTitle>
           <AlertDescription className="space-y-2 text-white/75">
-            <p>Expected on sample D4: 7 include, 2 review, 19 exclude (28 transactions). Switch to the sample account to match the homepage.</p>
+            <p>Expected on D4: 7 include, 2 review, 19 exclude (28 transactions). Use the D4 judge fixture to match the homepage.</p>
             <Button type="button" className="h-9 bg-white text-black hover:bg-white/90" disabled={busy} onClick={() => { void connectSampleAccount() }}>
-              <Landmark size={15} /> Switch to sample account
+              <Landmark size={15} /> Use D4 judge fixture
             </Button>
           </AlertDescription>
         </Alert>

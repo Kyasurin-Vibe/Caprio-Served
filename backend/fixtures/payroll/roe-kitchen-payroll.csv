@@ -1,7 +1,7 @@
 record_id,employee_name,record_type,period_start,period_end,gross_pay,hours,source
-PAY-AB-2026-01,Audrea Barnes,payroll_record,2026-01-01,2026-01-15,1820.00,80,payroll export
-WAGE-AB-2026-01,Audrea Barnes,wage_statement,2026-01-01,2026-01-15,1820.00,80,wage statement
-TIME-AB-2026-01,Audrea Barnes,time_record,2026-01-01,2026-01-15,,80,time tracking
+PAY-AB-2026-01,John Doe,payroll_record,2026-01-01,2026-01-15,1820.00,80,payroll export
+WAGE-AB-2026-01,John Doe,wage_statement,2026-01-01,2026-01-15,1820.00,80,wage statement
+TIME-AB-2026-01,John Doe,time_record,2026-01-01,2026-01-15,,80,time tracking
 PAY-MR-2026-01,Miguel Rivera,payroll_record,2026-01-01,2026-01-15,1960.00,80,payroll export
 WAGE-MR-2026-01,Miguel Rivera,wage_statement,2026-01-01,2026-01-15,1960.00,80,wage statement
 TIME-MR-2026-01,Miguel Rivera,time_record,2026-01-01,2026-01-15,,80,time tracking

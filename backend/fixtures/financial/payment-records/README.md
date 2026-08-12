@@ -7,21 +7,21 @@ Everything in this folder is fictional training data.
 ## Demo story
 
 D4 is a second AO 88B training subpoena in the same case used by D1:
-`Barnes v. Maximus Consulting Services, Inc.`,
-`5:25-cv-02108-KK-SP`, C.D. California. It arrives after the D1 payroll
-response and asks Mendoza's Kitchen, LLC for records of payments made to or
-for the benefit of Audrea Barnes, including bank records reflecting those
+`Doe v. Acme Consulting Services, Inc.`,
+`5:25-cv-00000-AA-BB`, C.D. California. It arrives after the D1 payroll
+response and asks Roe's Kitchen, LLC for records of payments made to or
+for the benefit of John Doe, including bank records reflecting those
 payments.
 
 The user connects a synthetic Plaid Sandbox business checking account. Served
 compares the 28 transactions with the payee and date criteria displayed in D4:
 
-- **7 INCLUDE** - exact Audrea Barnes payee and in-range date matches
+- **7 INCLUDE** - exact John Doe payee and in-range date matches
 - **2 REVIEW** - one unnamed check and one near-name ACH
 - **19 EXCLUDE** - suppliers, operating expenses, other employees, and two
-  Audrea payments outside the displayed date range
+  John payments outside the displayed date range
 
-Demo headline: **"Matched 7 payments to Audrea Barnes. Flagged 2 for human
+Demo headline: **"Matched 7 payments to John Doe. Flagged 2 for human
 review. Excluded 19 - the agent never touched what the request didn't ask
 for."**
 
@@ -75,7 +75,7 @@ payment in this bank fixture before D4's July 16 locked cutoff.
 - An unnamed instrument or near-name is always routed to human review.
 - Other employees are excluded even when their dates and amounts resemble
   payroll.
-- Audrea payments before 2026-01-01 are excluded.
+- John payments before 2026-01-01 are excluded.
 - Every disposition carries a deterministic reason code.
 - No transaction is automatically sent, produced, or shared.
 

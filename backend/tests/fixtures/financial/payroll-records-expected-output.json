@@ -1,7 +1,7 @@
 {
   "fixture_id": "served-payroll-v1",
   "rules": {
-    "employee_match": "Exact normalized match to Audrea Barnes or employee_id E-1042",
+    "employee_match": "Exact normalized match to John Doe or employee_id E-1042",
     "allowed_record_types": [
       "PAYROLL_REGISTER",
       "WAGE_STATEMENT",
@@ -10,7 +10,7 @@
     "date_rule": "INCLUDE when period_start >= 2026-01-01 and period_end <= 2026-07-15; REVIEW when the record overlaps a boundary or date meaning is ambiguous; otherwise EXCLUDE",
     "human_review_required": true,
     "automatic_send": false,
-    "near_name_rule": "A name similar to but not exactly matching the subject (e.g., 'Audrea Barns', different employee_id) routes to REVIEW with NAME_NEAR_MATCH_NEEDS_HUMAN. Never auto-include a near match."
+    "near_name_rule": "A name similar to but not exactly matching the subject (e.g., 'Jon Doe', different employee_id) routes to REVIEW with NAME_NEAR_MATCH_NEEDS_HUMAN. Never auto-include a near match."
   },
   "expected_by_record_id": {
     "PR-0001": {
@@ -173,5 +173,5 @@
     "export_action": "Export review packet",
     "forbidden_action": "Do not automatically send records to a court, attorney, agency, or third party."
   },
-  "demo_headline": "Matched 3 records for Audrea Barnes. Flagged 4 for human review. Excluded 29 - including 24 records belonging to 11 other employees and 1 near-name that only a human should judge."
+  "demo_headline": "Matched 3 records for John Doe. Flagged 4 for human review. Excluded 29 - including 24 records belonging to 11 other employees and 1 near-name that only a human should judge."
 }

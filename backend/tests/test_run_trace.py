@@ -226,8 +226,8 @@ def test_explainer_only_quota_failure_keeps_the_verified_fallback_explanation() 
     parsed = DocumentParse(
         doc_type="Subpoena",
         court="United States District Court",
-        case_number="5:25-cv-02108-KK-SP",
-        parties=["Audrea Barnes", "Maximus Consulting Services"],
+        case_number="5:25-cv-00000-AA-BB",
+        parties=["John Doe", "Acme Consulting Services"],
         visible_text="Visible subpoena text",
     )
     checker = CheckerReport(

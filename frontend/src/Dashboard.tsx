@@ -326,7 +326,7 @@ export function Dashboard({ initialIntent = null, onIntentConsumed, demoMode = f
     setSummary(null)
   }
 
-  const workflowSteps = ["Verify request", "Connect sample bank", "Review candidate records", "Generate packet"]
+  const workflowSteps = ["Verify request", "Connect bank", "Review candidate records", "Generate packet"]
   const workflowStepIndex = activeTab === "response"
     ? 3
     : activeTab === "sources" || activeTab === "settings" || latestAnalysis?.verdict === "verified"

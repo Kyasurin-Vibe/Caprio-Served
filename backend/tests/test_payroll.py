@@ -14,12 +14,12 @@ from app.services.payroll_matcher import extract_payroll_criteria, match_payroll
 
 PROFILE = UserProfile(
     subject="restaurant-owner-1",
-    email="owner@mendozaskitchen.example",
-    name="Raul Mendoza",
-    given_name="Raul",
+    email="owner@roeskitchen.example",
+    name="Richard Roe",
+    given_name="Richard",
     picture=None,
 )
-SAMPLE = Path(__file__).resolve().parents[1] / "fixtures" / "payroll" / "mendoza-kitchen-payroll.csv"
+SAMPLE = Path(__file__).resolve().parents[1] / "fixtures" / "payroll" / "roe-kitchen-payroll.csv"
 
 
 def _analysis(verdict: VerdictState = VerdictState.VERIFIED) -> AnalysisResponse:
@@ -30,10 +30,10 @@ def _analysis(verdict: VerdictState = VerdictState.VERIFIED) -> AnalysisResponse
         confidence=Confidence.HIGH,
         breakdown=LetterBreakdown(
             court="United States District Court, Central District of California",
-            case_number="5:25-cv-02108-KK-SP",
-            parties=["Audrea Barnes", "Mendoza's Kitchen, LLC"],
+            case_number="5:25-cv-00000-AA-BB",
+            parties=["John Doe", "Roe's Kitchen, LLC"],
             requested_actions=[
-                "All payroll records, wage statements, and time records for Audrea Barnes, from January 1, 2026 to the present."
+                "All payroll records, wage statements, and time records for John Doe, from January 1, 2026 to the present."
             ],
         ),
         evidence=[],
@@ -53,7 +53,7 @@ def test_sample_payroll_match_returns_three_candidates_and_protects_fourteen_rec
         "wage_statement",
         "time_record",
     }
-    assert {item.employee_name for item in result.strong_matches} == {"Audrea Barnes"}
+    assert {item.employee_name for item in result.strong_matches} == {"John Doe"}
     assert "Miguel Rivera" not in result.model_dump_json()
     assert "14 records stayed outside" in result.privacy_note
     assert result.human_review_required is True

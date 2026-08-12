@@ -37,9 +37,9 @@ def _analysis(
     supported_request: bool = True,
 ) -> AnalysisResponse:
     actions = [
-        "All records of payments made to or for the benefit of Audrea Barnes from January 1, 2026 to the present, including payroll payments and bank records reflecting such payments."
+        "All records of payments made to or for the benefit of John Doe from January 1, 2026 to the present, including payroll payments and bank records reflecting such payments."
     ] if supported_request else [
-        "All payroll records, wage statements, and time records for Audrea Barnes from January 1, 2026 to the present."
+        "All payroll records, wage statements, and time records for John Doe from January 1, 2026 to the present."
     ]
     return AnalysisResponse(
         document_type="Subpoena to produce records",
@@ -48,8 +48,8 @@ def _analysis(
         confidence=Confidence.HIGH,
         breakdown=LetterBreakdown(
             court="United States District Court, Central District of California",
-            case_number="5:25-cv-02108-KK-SP",
-            parties=["Audrea Barnes", "Maximus Consulting Services"],
+            case_number="5:25-cv-00000-AA-BB",
+            parties=["John Doe", "Acme Consulting Services"],
             document_date="2026-07-16",
             requested_actions=actions,
         ),
@@ -325,7 +325,7 @@ def test_exchange_keeps_access_token_server_side_after_rechecking_gate() -> None
     assert connections.update_one.await_args.kwargs == {"upsert": True}
 
 
-def test_d4_sandbox_connect_uses_seeded_audrea_transactions() -> None:
+def test_d4_sandbox_connect_uses_seeded_john_transactions() -> None:
     analysis_id = ObjectId()
     analyses = SimpleNamespace(find_one=AsyncMock(return_value=_analysis_record(analysis_id)))
     connections = SimpleNamespace(update_one=AsyncMock())
@@ -356,15 +356,15 @@ def test_d4_sandbox_connect_uses_seeded_audrea_transactions() -> None:
     assert response.status_code == 200
     assert "D4 sample" in response.json()["institution_name"]
     assert response.json()["demo_fixture"] is True
-    exact_audrea = [
+    exact_john = [
         item
         for item in fixture["override_accounts"][0]["transactions"]
-        if item["description"] == "PAYROLL ACH - AUDREA BARNES"
+        if item["description"] == "PAYROLL ACH - JOHN DOE"
     ]
-    assert len(exact_audrea) == 9
-    assert len([item for item in exact_audrea if item["date_transacted"] >= "2026-01-01"]) == 7
+    assert len(exact_john) == 9
+    assert len([item for item in exact_john if item["date_transacted"] >= "2026-01-01"]) == 7
     assert "CHECK #1042" in descriptions
-    assert "ACH - A. BARNS" in descriptions
+    assert "ACH - J. DOE" in descriptions
     create_public_token.assert_not_awaited()
     exchange.assert_not_awaited()
     _, update = connections.update_one.await_args.args
@@ -501,7 +501,7 @@ def test_guest_d4_uses_seeded_fixture_without_plaid_credentials() -> None:
         )
 
     assert connected.status_code == 200
-    assert connected.json()["institution_name"] == "Mendoza’s Kitchen Sandbox"
+    assert connected.json()["institution_name"] == "Roe’s Kitchen Sandbox"
     assert connected.json()["demo_fixture"] is True
     assert matched.status_code == 200
     assert matched.json()["summary"] == {
@@ -1024,7 +1024,7 @@ def test_transaction_sync_waits_for_historical_update() -> None:
         "transactions_update_status": "NOT_READY",
     }
     ready_page = {
-        "added": [{"transaction_id": "tx-ready", "name": "PAYROLL ACH - AUDREA BARNES"}],
+        "added": [{"transaction_id": "tx-ready", "name": "PAYROLL ACH - JOHN DOE"}],
         "modified": [],
         "removed": [],
         "next_cursor": "cursor-ready",

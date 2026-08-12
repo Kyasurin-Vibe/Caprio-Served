@@ -329,7 +329,7 @@ export function PayrollRecordsCard({ analysis, analysisId, documentName, onWorkf
             }}
           />
         </div>
-        <p className="mt-3 text-[10px] leading-4 text-white/40">Mendoza&apos;s Kitchen payroll records. No live payroll account is used.</p>
+        <p className="mt-3 text-[10px] leading-4 text-white/40">Roe&apos;s Kitchen payroll records. No live payroll account is used.</p>
       </div>}
 
       {result && <div className="mt-5 space-y-4">
